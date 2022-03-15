@@ -1,25 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <NavBar />
+  <GameBoard />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent } from "vue";
+import NavBar from "./components/NavBar.vue";
+import GameBoard from "./views/GameBoard.vue";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
+    GameBoard,
+    NavBar,
+  },
 });
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: "Press Start 2P";
+  src: local("Press Start 2P"),
+    url(./assets/fonts/PressStart2P-Regular.ttf) format("truetype");
+}
+
+html {
+  background-color: #212529;
+
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Press Start 2P", cursive;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
