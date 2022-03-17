@@ -1,5 +1,7 @@
 # genius
 
+Se it live: https://genius.overbecksilvaleonardo.dev
+
 ## Project setup
 ```
 npm install
