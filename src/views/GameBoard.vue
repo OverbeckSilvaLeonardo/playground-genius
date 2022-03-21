@@ -19,15 +19,18 @@
         <GameTile :color="'blue'"/>
       </div>
     </div>
+
+    <FloatingIcon />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GameTile from '@/components/GameTile.vue';
+import FloatingIcon from '@/components/FloatingIcon.vue';
 
 export default defineComponent({
-  components: { GameTile }
+  components: { FloatingIcon, GameTile }
 });
 </script>
 
