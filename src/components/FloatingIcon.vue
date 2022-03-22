@@ -29,21 +29,29 @@ export default defineComponent({
     async setExpanding() {
       this.isExpanding = true;
       this.isRetracted = false;
+      this.isRetracting = false;
+      this.isExpanded = false;
 
       await this.sleep(this.animationDuration);
 
-      this.isExpanding = false;
       this.isExpanded = true;
+      this.isExpanding = false;
+      this.isRetracted = false;
+      this.isRetracting = false;
     },
 
     async setRetracting() {
-      this.isExpanded = false;
       this.isRetracting = true;
+      this.isExpanded = false;
+      this.isRetracted = false;
+      this.isExpanding = false;
 
       await this.sleep(this.animationDuration);
 
       this.isRetracted = true;
       this.isRetracting = false;
+      this.isExpanded = false;
+      this.isExpanding = false;
 
     },
     sleep(ms) {
