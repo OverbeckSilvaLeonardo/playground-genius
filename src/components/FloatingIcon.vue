@@ -1,12 +1,12 @@
 <template>
   <a class="floating-icon"
-     :class="{expanding: isExpanding, retracting: isRetracting, expanded: isExpanded, retracted: isRetracted}"
+     :class="{ expanding: isExpanding, retracting: isRetracting, expanded: isExpanded, retracted: isRetracted }"
      @mouseenter="setExpanding"
      @mouseleave="setRetracting"
   >
     <div class="icon-content-wrapper">
       <i class="nes-icon coin"></i>
-      <p>info</p>
+      <p :style="{ opacity: isExpanded ? 1 : 0 }">info</p>
     </div>
   </a>
 </template>
@@ -22,7 +22,7 @@ export default defineComponent({
       isRetracting: false,
       isExpanded: false,
       isRetracted: true,
-      animationDuration: 250,
+      animationDuration: 100,
     };
   },
   methods: {
@@ -32,7 +32,7 @@ export default defineComponent({
       this.isRetracting = false;
       this.isExpanded = false;
 
-      await this.sleep(this.animationDuration);
+      await this.sleep(this.animationDuration + 1);
 
       this.isExpanded = true;
       this.isExpanding = false;
@@ -46,7 +46,7 @@ export default defineComponent({
       this.isRetracted = false;
       this.isExpanding = false;
 
-      await this.sleep(this.animationDuration);
+      await this.sleep(this.animationDuration + 1);
 
       this.isRetracted = true;
       this.isRetracting = false;
@@ -68,14 +68,14 @@ export default defineComponent({
 $icon-size: 32px;
 $float-anchor-size: 60px;
 $float-anchor-size-expanded: calc(#{$float-anchor-size} * 2.35);
-$animation-length: 250ms;
+$animation-length: 100ms;
 
 .floating-icon {
   position: fixed;
   display: block;
   height: $float-anchor-size;
   border-radius: calc(#{$float-anchor-size} / 2);
-  background-color: $background-secondary;
+  background-color: $background-primary;
   padding-top: calc((#{$float-anchor-size} - #{$icon-size}) / 2);
   padding-left: calc((#{$float-anchor-size} - #{$icon-size}) / 2);
   bottom: 40px;
@@ -97,11 +97,11 @@ i {
 }
 
 p {
-  margin-left: calc(#{$icon-size} * 1.37);
+  margin-left: calc(#{$icon-size} * 1.3);
   margin-top: 3px;
-  color: $background-primary;
+  color: $background-secondary;
+  transition: opacity 200ms ease-in-out
 }
-
 
 .retracted {
   width: $float-anchor-size;
@@ -139,6 +139,5 @@ p {
 
 .retracting {
   animation: retract $animation-length ease-in-out forwards;
-
 }
 </style>
