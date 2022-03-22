@@ -54,7 +54,7 @@ export default defineComponent({
       this.isExpanding = false;
 
     },
-    sleep(ms) {
+    sleep(ms: number) {
       return new Promise(r => setTimeout(r, ms));
     }
   }
