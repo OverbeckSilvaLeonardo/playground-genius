@@ -11,6 +11,10 @@
       <div class="column is-one-third">
         <difficulty-selection />
       </div>
+
+      <div class="column is-one-third">
+        <start-game-button/>
+      </div>
     </div>
 
     <div class="columns is-multiline is-centered is-gapless is-mobile">
@@ -40,9 +44,10 @@ import GameTile from '@/components/GameTile.vue';
 import FloatingIcon from '@/components/FloatingIcon.vue';
 import GameModeSelection from '@/components/GameModeSelection.vue';
 import DifficultySelection from '@/components/DifficultySelection.vue';
+import StartGameButton from '@/components/StartGameButton.vue';
 
 export default defineComponent({
-  components: { DifficultySelection, FloatingIcon, GameTile, GameModeSelection }
+  components: { StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection }
 });
 </script>
 

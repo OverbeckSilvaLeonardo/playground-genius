@@ -40,5 +40,9 @@ html {
   a:hover {
     cursor: var(--cursor);
   }
+
+  button {
+    font-family: "Press Start 2P", sans-serif;
+  }
 }
 </style>

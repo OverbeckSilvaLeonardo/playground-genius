@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label v-if="label">{{ label }}</label>
+    <label v-if="label" class="white-text">{{ label }}</label>
     <label v-for="(option, index) in options" :key="index">
       <input type="radio" class="nes-radio is-dark" :name="name || 'radio-group'" :value="option.value" v-model="selectedOption"/>
       <span>{{ option.label }}</span>
@@ -51,5 +51,10 @@ export default defineComponent({
 <style scoped lang="scss">
 label {
   margin: .5rem;
+
+  &.white-text {
+    color: var(--background-secondary);
+    margin-right: .5rem;
+  }
 }
 </style>
