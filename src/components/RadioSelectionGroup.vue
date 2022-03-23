@@ -42,6 +42,8 @@ export default defineComponent({
         options.push({ label: i, value: i });
       }
 
+      console.log(this.$store.state);
+
       return options;
     }
   }
