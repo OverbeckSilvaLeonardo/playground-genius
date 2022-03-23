@@ -63,8 +63,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 
-@import '../scss/_variables.scss';
-
 $icon-size: 32px;
 $float-anchor-size: 60px;
 $float-anchor-size-expanded: calc(#{$float-anchor-size} * 2.35);
@@ -75,7 +73,7 @@ $animation-length: 100ms;
   display: block;
   height: $float-anchor-size;
   border-radius: calc(#{$float-anchor-size} / 2);
-  background-color: $background-primary;
+  background-color: var(--background-primary);
   padding-top: calc((#{$float-anchor-size} - #{$icon-size}) / 2);
   padding-left: calc((#{$float-anchor-size} - #{$icon-size}) / 2);
   bottom: 40px;
@@ -99,7 +97,7 @@ i {
 p {
   margin-left: calc(#{$icon-size} * 1.3);
   margin-top: 3px;
-  color: $background-secondary;
+  color: var(--background-secondary);
   transition: opacity 200ms ease-in-out
 }
 

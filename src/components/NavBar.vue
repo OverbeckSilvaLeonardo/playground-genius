@@ -13,20 +13,19 @@ export default defineComponent({});
 </script>
 
 <style scoped lang="scss">
-@import '../scss/_variables.scss';
 
 nav {
-  background-color: $background-primary;
+  background-color: var(--background-primary);
   top: 0;
 
   a.navbar-item {
-    background-color: $background-primary;
-    color: $background-secondary;
+    background-color: var(--background-primary);
+    color: var(--background-secondary);
   }
 
   a.navbar-item:hover {
-    background-color: $background-secondary;
-    color: $background-primary;
+    background-color: var(--background-secondary);
+    color: var(--background-primary);
     text-decoration: none;
   }
 }

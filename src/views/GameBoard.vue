@@ -5,18 +5,18 @@
 
     <div class="columns is-multiline is-centered is-gapless is-mobile">
       <div class="column is-half">
-        <GameTile :color="'green'"/>
+        <game-tile :color="'green'"/>
       </div>
 
       <div class="column is-half">
-        <GameTile :color="'red'"/>
+        <game-tile :color="'red'"/>
       </div>
 
       <div class="column is-half">
-        <GameTile :color="'yellow'"/>
+        <game-tile :color="'yellow'"/>
       </div>
       <div class="column is-half">
-        <GameTile :color="'blue'"/>
+        <game-tile :color="'blue'"/>
       </div>
     </div>
 
@@ -28,21 +28,20 @@
 import { defineComponent } from 'vue';
 import GameTile from '@/components/GameTile.vue';
 import FloatingIcon from '@/components/FloatingIcon.vue';
+import GameModeSelection from '@/components/GameModeSelection.vue';
 
 export default defineComponent({
-  components: { FloatingIcon, GameTile }
+  components: { FloatingIcon, GameTile, GameModeSelection }
 });
 </script>
 
 <style scoped lang="scss">
 
-@import '../scss/_variables.scss';
-
 .container {
   margin-top: 20px;
 
   h1 {
-    color: $background-secondary;
+    color: var(--background-secondary);
     text-align: center;
     margin: 20px;
     font-size: 2rem;

@@ -13,14 +13,12 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 
-@import '../scss/_variables.scss';
-
 .tile {
   display: block;
   width: calc(100% - 20px);
   height: 20vw;
   margin: 10px;
-  cursor: $cursor;
+  cursor: var(--cursor);
 }
 
 .tile:hover {
@@ -28,19 +26,19 @@ export default defineComponent({
 }
 
 .green {
-  background-color: $green-tile;
+  background-color: var(--green-tile);
 }
 
 .blue {
-  background-color: $blue-tile;
+  background-color: var(--blue-tile);
 }
 
 .red {
-  background-color: $red-tile;
+  background-color: var(--red-tile);
 
 }
 
 .yellow {
-  background-color: $yellow-tile;
+  background-color: var(--yellow-tile);
 }
 </style>

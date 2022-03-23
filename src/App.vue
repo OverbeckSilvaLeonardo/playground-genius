@@ -1,15 +1,17 @@
 <template>
-  <NavBar />
-  <GameBoard />
+  <main>
+    <NavBar/>
+    <GameBoard/>
+  </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import NavBar from "./components/NavBar.vue";
-import GameBoard from "./views/GameBoard.vue";
+import { defineComponent } from 'vue';
+import NavBar from './components/NavBar.vue';
+import GameBoard from './views/GameBoard.vue';
 
 export default defineComponent({
-  name: "App",
+  name: 'App',
   components: {
     GameBoard,
     NavBar,
@@ -24,7 +26,7 @@ export default defineComponent({
 @font-face {
   font-family: "Press Start 2P";
   src: local("Press Start 2P"),
-    url(./assets/fonts/PressStart2P-Regular.ttf) format("truetype");
+  url(./assets/fonts/PressStart2P-Regular.ttf) format("truetype");
 }
 
 html {
@@ -36,7 +38,7 @@ html {
   background-color: #212529 !important;
 
   a:hover {
-    cursor: $cursor;
+    cursor: var(--cursor);
   }
 }
 </style>
