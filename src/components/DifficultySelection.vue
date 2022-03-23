@@ -1,6 +1,6 @@
 <template>
   <div>
-    <radio-selection-group number-of-options="3" label="Game Mode" name="game-mode-selection"/>
+    <radio-selection-group number-of-options="5" label="Difficulty" name="difficulty-selection"/>
   </div>
 </template>
 
@@ -9,20 +9,18 @@
 import { defineComponent } from 'vue';
 import RadioSelectionGroup from '@/components/RadioSelectionGroup';
 
-
 export default defineComponent({
-  name: 'GameModeSelection',
+  name: 'DifficultySelection',
   components: { RadioSelectionGroup },
+
   data() {
     return {
-      selectedGameMode: 1
+      selectedDifficulty: 1
     }
   }
 });
 </script>
 
 <style scoped lang="scss">
-label {
-  margin: .5rem;
-}
+
 </style>

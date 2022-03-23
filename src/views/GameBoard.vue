@@ -3,6 +3,16 @@
 
     <h1 class="is-centered">GENIUS</h1>
 
+    <div class="columns">
+      <div class="column is-one-third">
+        <game-mode-selection />
+      </div>
+
+      <div class="column is-one-third">
+        <difficulty-selection />
+      </div>
+    </div>
+
     <div class="columns is-multiline is-centered is-gapless is-mobile">
       <div class="column is-half">
         <game-tile :color="'green'"/>
@@ -29,9 +39,10 @@ import { defineComponent } from 'vue';
 import GameTile from '@/components/GameTile.vue';
 import FloatingIcon from '@/components/FloatingIcon.vue';
 import GameModeSelection from '@/components/GameModeSelection.vue';
+import DifficultySelection from '@/components/DifficultySelection.vue';
 
 export default defineComponent({
-  components: { FloatingIcon, GameTile, GameModeSelection }
+  components: { DifficultySelection, FloatingIcon, GameTile, GameModeSelection }
 });
 </script>
 
