@@ -13,6 +13,11 @@ export const store = createStore<GameState>({
     gameMode: 1,
     difficulty: 1,
   },
+  mutations: {
+    'SET_DIFFICULTY'(state, difficulty: number) {
+      state.difficulty = difficulty;
+    }
+  }
 });
 
 export function useStore(): Store<GameState> {

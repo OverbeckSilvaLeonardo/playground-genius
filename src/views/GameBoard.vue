@@ -42,9 +42,9 @@
 import { defineComponent } from 'vue';
 import GameTile from '@/components/GameTile.vue';
 import FloatingIcon from '@/components/FloatingIcon.vue';
-import GameModeSelection from '@/components/GameModeSelection.vue';
-import DifficultySelection from '@/components/DifficultySelection.vue';
-import StartGameButton from '@/components/StartGameButton.vue';
+import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
+import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
+import StartGameButton from '@/components/Button/StartGameButton.vue';
 
 export default defineComponent({
   components: { StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection }

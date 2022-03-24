@@ -2,7 +2,7 @@
   <div>
     <label v-if="label" class="white-text">{{ label }}</label>
     <label v-for="(option, index) in options" :key="index">
-      <input type="radio" class="nes-radio is-dark" :name="name || 'radio-group'" :value="option.value" v-model="selectedOption"/>
+      <input type="radio" class="nes-radio is-dark" :name="name || 'radio-group'" :value="option.value" v-model="selectedOption" @click="emitSelectedOption"/>
       <span>{{ option.label }}</span>
     </label>
   </div>
@@ -13,6 +13,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'RadioSelectionGroup',
+  emits: ['onSelectionChange'],
   props: {
     numberOfOptions: {
       type: Number,
@@ -35,14 +36,17 @@ export default defineComponent({
       selectedOption: this.default || 1
     };
   },
+  methods: {
+    emitSelectedOption() {
+      this.$emit('onSelectionChange', this.selectedOption);
+    }
+  },
   computed: {
     options() {
       let options = [];
       for (let i = 1; i <= this.numberOfOptions; i++) {
         options.push({ label: i, value: i });
       }
-
-      console.log(this.$store.state);
 
       return options;
     }
