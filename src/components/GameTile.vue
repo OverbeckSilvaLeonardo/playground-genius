@@ -2,17 +2,14 @@
   <div class="tile" :class="this.color"></div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'GameTile',
-  props: [
-      'color'
-  ],
+  name: "GameTile",
+  props: ["color"],
 });
 </script>
 <style scoped lang="scss">
-
 .tile {
   display: block;
   width: calc(100% - 20px);
@@ -35,7 +32,6 @@ export default defineComponent({
 
 .red {
   background-color: var(--red-tile);
-
 }
 
 .yellow {

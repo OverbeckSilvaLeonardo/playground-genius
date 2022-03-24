@@ -1,26 +1,36 @@
 <template>
   <div>
-    <radio-selection-group number-of-options="5" label="Difficulty" name="difficulty-selection"/>
+    <radio-selection-group
+      :number-of-options="5"
+      label="Difficulty"
+      name="difficulty-selection"
+      @onSelectionChange="setDifficuly"
+    />
   </div>
 </template>
 
-<script>
-
-import { defineComponent } from 'vue';
-import RadioSelectionGroup from '@/components/RadioSelectionGroup';
+<script lang="ts">
+import { defineComponent } from "vue";
+import RadioSelectionGroup from "@/components/Selection/RadioSelectionGroup.vue";
+import { useStore } from "@/store";
 
 export default defineComponent({
-  name: 'DifficultySelection',
+  name: "DifficultySelection",
   components: { RadioSelectionGroup },
 
-  data() {
-    return {
-      selectedDifficulty: 1
-    }
-  }
+  methods: {
+    setDifficuly(difficulty: number) {
+      this.store.commit("SET_DIFFICULTY", difficulty);
+    },
+  },
+  setup() {
+    const store = useStore();
+
+    console.log(store);
+
+    return { store };
+  },
 });
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

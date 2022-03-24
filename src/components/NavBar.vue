@@ -1,19 +1,23 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
-      <a class="nes-pointer navbar-item" href="https://overbecksilvaleonardo.dev">Dashboard</a>
+      <a
+        class="nes-pointer navbar-item"
+        href="https://overbecksilvaleonardo.dev"
+      >
+        Dashboard
+      </a>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({});
 </script>
 
 <style scoped lang="scss">
-
 nav {
   background-color: var(--background-primary);
   top: 0;

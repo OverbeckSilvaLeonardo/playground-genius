@@ -1,8 +1,14 @@
 <template>
-  <a class="floating-icon"
-     :class="{ expanding: isExpanding, retracting: isRetracting, expanded: isExpanded, retracted: isRetracted }"
-     @mouseenter="setExpanding"
-     @mouseleave="setRetracting"
+  <a
+    class="floating-icon"
+    :class="{
+      expanding: isExpanding,
+      retracting: isRetracting,
+      expanded: isExpanded,
+      retracted: isRetracted,
+    }"
+    @mouseenter="setExpanding"
+    @mouseleave="setRetracting"
   >
     <div class="icon-content-wrapper">
       <i class="nes-icon coin"></i>
@@ -12,10 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'FloatingIcon',
+  name: "FloatingIcon",
   data() {
     return {
       isExpanding: false,
@@ -52,17 +58,15 @@ export default defineComponent({
       this.isRetracting = false;
       this.isExpanded = false;
       this.isExpanding = false;
-
     },
     sleep(ms: number) {
-      return new Promise(r => setTimeout(r, ms));
-    }
-  }
+      return new Promise((r) => setTimeout(r, ms));
+    },
+  },
 });
 </script>
 
 <style scoped lang="scss">
-
 $icon-size: 32px;
 $float-anchor-size: 60px;
 $float-anchor-size-expanded: calc(#{$float-anchor-size} * 2.35);
@@ -98,7 +102,7 @@ p {
   margin-left: calc(#{$icon-size} * 1.3);
   margin-top: 3px;
   color: var(--background-secondary);
-  transition: opacity 200ms ease-in-out
+  transition: opacity 200ms ease-in-out;
 }
 
 .retracted {
@@ -116,13 +120,11 @@ p {
 
   to {
     width: $float-anchor-size-expanded;
-
   }
 }
 
 .expanding {
   animation: expand $animation-length ease-in-out forwards;
-
 }
 
 @keyframes retract {

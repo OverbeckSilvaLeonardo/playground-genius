@@ -1,39 +1,42 @@
 <template>
   <div>
-    <radio-selection-group number-of-options="3" label="Game Mode" name="game-mode-selection" @onSelectionChange="setDifficuly"/>
+    <radio-selection-group
+      :number-of-options="3"
+      label="Game Mode"
+      name="game-mode-selection"
+      @onSelectionChange="setGameMode"
+    />
   </div>
 </template>
 
 <script lang="ts">
-
-import { defineComponent } from 'vue';
-import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
-import { useStore } from '@/store';
-
+import { defineComponent } from "vue";
+import RadioSelectionGroup from "@/components/Selection/RadioSelectionGroup.vue";
+import { useStore } from "@/store";
 
 export default defineComponent({
-  name: 'GameModeSelection',
+  name: "GameModeSelection",
   components: { RadioSelectionGroup },
   data() {
     return {
-      selectedGameMode: 1
+      selectedGameMode: 1,
     };
   },
   methods: {
-    setDifficuly(difficulty: number) {
-      this.store.commit('SET_DIFFICULTY', difficulty);
-    }
+    setGameMode(gameMode: number) {
+      return;
+    },
   },
   setup() {
     const store = useStore();
 
     return { store };
-  }
+  },
 });
 </script>
 
 <style scoped lang="scss">
 label {
-  margin: .5rem;
+  margin: 0.5rem;
 }
 </style>

@@ -6,8 +6,6 @@ interface GameState {
   difficulty: number;
 }
 
-export const key: InjectionKey<Store<GameState>> = Symbol();
-
 export const store = createStore<GameState>({
   state: {
     gameMode: 1,
@@ -15,10 +13,12 @@ export const store = createStore<GameState>({
   },
   mutations: {
     'SET_DIFFICULTY'(state, difficulty: number) {
-      state.difficulty = difficulty;
+      store.state.difficulty = difficulty;
     }
   }
 });
+
+export const key: InjectionKey<Store<GameState>> = Symbol();
 
 export function useStore(): Store<GameState> {
   return vuexUseStore(key)

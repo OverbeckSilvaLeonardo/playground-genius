@@ -2,44 +2,51 @@
   <div>
     <label v-if="label" class="white-text">{{ label }}</label>
     <label v-for="(option, index) in options" :key="index">
-      <input type="radio" class="nes-radio is-dark" :name="name || 'radio-group'" :value="option.value" v-model="selectedOption" @click="emitSelectedOption"/>
+      <input
+        type="radio"
+        class="nes-radio is-dark"
+        :name="name || 'radio-group'"
+        :value="option.value"
+        v-model="selectedOption"
+        @change="emitSelectedOption"
+      />
       <span>{{ option.label }}</span>
     </label>
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'RadioSelectionGroup',
-  emits: ['onSelectionChange'],
+  name: "RadioSelectionGroup",
+  emits: ["onSelectionChange"],
   props: {
     numberOfOptions: {
       type: Number,
-      required: true
+      required: true,
     },
     label: {
       type: String,
-      required: false
+      required: false,
     },
     default: {
-      required: false
+      required: false,
     },
     name: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {
-      selectedOption: this.default || 1
+      selectedOption: this.default || 1,
     };
   },
   methods: {
     emitSelectedOption() {
-      this.$emit('onSelectionChange', this.selectedOption);
-    }
+      this.$emit("onSelectionChange", this.selectedOption);
+    },
   },
   computed: {
     options() {
@@ -49,18 +56,18 @@ export default defineComponent({
       }
 
       return options;
-    }
-  }
+    },
+  },
 });
 </script>
 
 <style scoped lang="scss">
 label {
-  margin: .5rem;
+  margin: 0.5rem;
 
   &.white-text {
     color: var(--background-secondary);
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 }
 </style>
