@@ -24,7 +24,7 @@ export default defineComponent({
   },
   methods: {
     setGameMode(gameMode: number) {
-      return;
+      this.store.commit('SET_GAME_MODE', gameMode)
     },
   },
   setup() {
