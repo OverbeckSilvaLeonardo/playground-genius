@@ -40,8 +40,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import GameTile from '@/components/GameTile.vue';
-import FloatingIcon from '@/components/FloatingIcon.vue';
+import GameTile from '@/components/Game/GameTile.vue';
+import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
 import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
 import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
 import StartGameButton from '@/components/Button/StartGameButton.vue';
