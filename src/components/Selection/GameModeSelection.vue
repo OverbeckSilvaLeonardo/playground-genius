@@ -10,26 +10,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import RadioSelectionGroup from "@/components/Selection/RadioSelectionGroup.vue";
-import { useStore } from "@/store";
+import { defineComponent } from 'vue';
+import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
+import { useStore } from '@/store';
 
 export default defineComponent({
-  name: "GameModeSelection",
+  name: 'GameModeSelection',
   components: { RadioSelectionGroup },
-  data() {
-    return {
-      selectedGameMode: 1,
-    };
-  },
+
   methods: {
     setGameMode(gameMode: number) {
-      this.store.commit('SET_GAME_MODE', gameMode)
+      this.store.commit('SET_GAME_MODE', gameMode);
     },
   },
+
   setup() {
     const store = useStore();
-
     return { store };
   },
 });

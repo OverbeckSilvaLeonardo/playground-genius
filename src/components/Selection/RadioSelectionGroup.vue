@@ -20,7 +20,9 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "RadioSelectionGroup",
+
   emits: ["onSelectionChange"],
+
   props: {
     numberOfOptions: {
       type: Number,
@@ -38,16 +40,19 @@ export default defineComponent({
       required: false,
     },
   },
+
   data() {
     return {
       selectedOption: this.default || 1,
     };
   },
+
   methods: {
     emitSelectedOption() {
       this.$emit("onSelectionChange", this.selectedOption);
     },
   },
+
   computed: {
     options() {
       let options = [];
