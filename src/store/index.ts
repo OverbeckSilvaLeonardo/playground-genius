@@ -1,15 +1,19 @@
 import { createStore, useStore as vuexUseStore, Store } from 'vuex';
 import { InjectionKey } from 'vue';
+import IGameMode from '@/services/gamemode.interface';
+import { GameModeFactory } from '@/factories/gamemode.factory';
 
 interface GameState {
   gameMode: number;
   difficulty: number;
+  service: IGameMode;
 }
 
 export const store = createStore<GameState>({
   state: {
     gameMode: 1,
     difficulty: 1,
+    service: GameModeFactory.build(1)
   },
   mutations: {
     'SET_DIFFICULTY'(state, difficulty: number) {
@@ -17,6 +21,7 @@ export const store = createStore<GameState>({
     },
     'SET_GAME_MODE'(state, gameMode: number) {
       store.state.gameMode = gameMode;
+      store.state.service = GameModeFactory.build(gameMode);
     }
   }
 });

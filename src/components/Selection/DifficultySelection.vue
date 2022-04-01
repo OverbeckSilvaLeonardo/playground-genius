@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <radio-selection-group
+  <radio-selection-group
       :number-of-options="5"
-      label="Difficulty"
       name="difficulty-selection"
+      label="Difficulty"
       @onSelectionChange="setDifficuly"
-    />
-  </div>
+  />
 </template>
 
 <script lang="ts">
@@ -31,4 +29,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.nes-container {
+  border-color: var(--background-secondary);
+}
+
+h3.title {
+  background-color: var(--background-dark) !important;
+  color: var(--background-secondary);
+}
+</style>

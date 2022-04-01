@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <radio-selection-group
-      :number-of-options="3"
-      label="Game Mode"
-      name="game-mode-selection"
-      @onSelectionChange="setGameMode"
-    />
-  </div>
+  <radio-selection-group
+    :number-of-options="3"
+    name="game-mode-selection"
+    label="Game Mode"
+    @onSelectionChange="setGameMode"
+  />
 </template>
 
 <script lang="ts">

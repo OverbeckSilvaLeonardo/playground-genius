@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <label v-if="label" class="white-text">{{ label }}</label>
+  <section class="nes-container with-title">
+    <h3 class="title">{{ label }}</h3>
     <label v-for="(option, index) in options" :key="index">
       <input
         type="radio"
@@ -12,7 +12,7 @@
       />
       <span>{{ option.label }}</span>
     </label>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -74,5 +74,14 @@ label {
     color: var(--background-secondary);
     margin-right: 0.5rem;
   }
+}
+
+.nes-container {
+  border-color: var(--background-secondary);
+}
+
+h3.title {
+  background-color: var(--background-dark) !important;
+  color: var(--background-secondary);
 }
 </style>

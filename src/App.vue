@@ -1,18 +1,21 @@
 <template>
   <main>
-    <NavBar/>
-    <GameBoard/>
+    <nav-bar/>
+    <game-board/>
+    <information-modal/>
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import NavBar from './components/Navigation/NavBar.vue';
-import GameBoard from './views/GameBoard.vue';
+import NavBar from '@/components/Navigation/NavBar.vue';
+import GameBoard from '@/views/GameBoard.vue';
+import InformationModal from '@/components/Modal/InformationModal.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
+    InformationModal,
     GameBoard,
     NavBar,
   },

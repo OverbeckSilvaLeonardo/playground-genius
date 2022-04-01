@@ -6,4 +6,6 @@ import "../node_modules/bulma/css/bulma.min.css";
 import "./scss/_variables.scss";
 import { key, store } from "@/store";
 
-createApp(App).use(store, key).mount("#app");
+createApp(App)
+  .use(store, key)
+  .mount("#app");
