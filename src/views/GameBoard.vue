@@ -1,18 +1,18 @@
 <template>
-  <div class="container">
+  <div class="container is-mobile">
 
     <h1 class="is-centered">GENIUS</h1>
 
-    <div class="columns">
-      <div class="column is-one-third">
+    <div class="columns is-multiline is-gapless px-4">
+      <div class="column is-full my-4">
         <game-mode-selection />
       </div>
 
-      <div class="column is-one-third">
+      <div class="column is-full my-4">
         <difficulty-selection />
       </div>
 
-      <div class="column is-one-third">
+      <div class="column is-full my-4">
         <start-game-button/>
       </div>
     </div>
