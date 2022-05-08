@@ -13,7 +13,8 @@
       </div>
 
       <div class="column is-full my-4">
-        <start-game-button/>
+        <start-game-button v-if="!isRunning" @startGame="start"/>
+        <finish-game-button v-else @finishGame="stop"/>
       </div>
     </div>
 
@@ -46,12 +47,17 @@ import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
 import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
 import StartGameButton from '@/components/Button/StartGameButton.vue';
 import { useStore } from '@/store';
+import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 
 export default defineComponent({
-  components: { StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection },
+  components: { FinishGameButton, StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection },
   methods: {
     start(): void {
       this.store.commit('SET_GAME_RUNNING');
+      // this.service.startGame();
+    },
+    stop(): void {
+      this.store.commit('SET_GAME_NOT_RUNNING');
       // this.service.startGame();
     }
   },
@@ -60,7 +66,8 @@ export default defineComponent({
 
     return {
       store,
-      service: computed(() => store.state.service)
+      service: computed(() => store.state.service),
+      isRunning: computed(() => store.state.isRunning)
     };
   },
 });
