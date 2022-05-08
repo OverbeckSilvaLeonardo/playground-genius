@@ -17,7 +17,7 @@ export default defineComponent({
   components: { RadioSelectionGroup },
 
   methods: {
-    setDifficuly(difficulty: number) {
+    setDifficuly(difficulty: number): void {
       this.store.commit('SET_DIFFICULTY', difficulty);
     },
   },

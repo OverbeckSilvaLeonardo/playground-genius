@@ -16,10 +16,11 @@ export default defineComponent({
   height: 20vw;
   margin: 10px;
   cursor: var(--cursor);
+  transition: all 75ms ease-in-out;
 }
 
 .tile:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
 }
 
 .green {

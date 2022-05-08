@@ -17,7 +17,7 @@ export default defineComponent({
   components: { RadioSelectionGroup },
 
   methods: {
-    setGameMode(gameMode: number) {
+    setGameMode(gameMode: number): void {
       this.store.commit('SET_GAME_MODE', gameMode);
     },
   },

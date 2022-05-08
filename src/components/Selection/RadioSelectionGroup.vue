@@ -15,7 +15,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -48,7 +48,7 @@ export default defineComponent({
   },
 
   methods: {
-    emitSelectedOption() {
+    emitSelectedOption(): void {
       this.$emit("onSelectionChange", this.selectedOption);
     },
   },
