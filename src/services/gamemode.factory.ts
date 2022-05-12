@@ -3,7 +3,7 @@ import IGameMode from '@/services/gamemode.interface';
 import GameModeTwoService from '@/services/gamemodetwo.service';
 import GameModeThreeService from '@/services/gamemodethree.service';
 
-export class GameModeFactory {
+export default class GameModeFactory {
 
   static build(gamemode: number): IGameMode {
     if (gamemode === 1) {
