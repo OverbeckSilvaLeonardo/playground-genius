@@ -3,12 +3,12 @@
     <h3 class="title">{{ label }}</h3>
     <label v-for="(option, index) in options" :key="index">
       <input
-        type="radio"
-        class="nes-radio is-dark"
-        :name="name || 'radio-group'"
-        :value="option.value"
-        v-model="selectedOption"
-        @change="emitSelectedOption"
+          type="radio"
+          class="nes-radio is-dark"
+          :name="name || 'radio-group'"
+          :value="option.value"
+          v-model="selectedOption"
+          @change="emitSelectedOption"
       />
       <span>{{ option.label }}</span>
     </label>
@@ -16,12 +16,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: "RadioSelectionGroup",
+  name: 'RadioSelectionGroup',
 
-  emits: ["onSelectionChange"],
+  emits: ['onSelectionChange'],
 
   props: {
     numberOfOptions: {
@@ -33,6 +33,7 @@ export default defineComponent({
       required: false,
     },
     default: {
+      type: Number,
       required: false,
     },
     name: {
@@ -41,27 +42,28 @@ export default defineComponent({
     },
   },
 
-  data() {
-    return {
-      selectedOption: this.default || 1,
-    };
-  },
+  setup(props, { emit }) {
+    const selectedOption = ref(0);
+    selectedOption.value = props.default || 1;
 
-  methods: {
-    emitSelectedOption(): void {
-      this.$emit("onSelectionChange", this.selectedOption);
-    },
-  },
-
-  computed: {
-    options() {
+    const options = computed(() => {
       let options = [];
-      for (let i = 1; i <= this.numberOfOptions; i++) {
+      for (let i = 1; i <= props.numberOfOptions; i++) {
         options.push({ label: i, value: i });
       }
 
       return options;
-    },
+    });
+
+    const emitSelectedOption = (): void => {
+      emit('onSelectionChange', selectedOption.value);
+    };
+
+    return {
+      selectedOption,
+      options,
+      emitSelectedOption,
+    };
   },
 });
 </script>

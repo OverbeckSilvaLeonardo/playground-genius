@@ -11,20 +11,20 @@
 import { defineComponent } from 'vue';
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
 import { useStore } from '@/store';
+import { SET_DIFFICULTY } from '@/store/mutation-types';
 
 export default defineComponent({
   name: 'DifficultySelection',
   components: { RadioSelectionGroup },
 
-  methods: {
-    setDifficuly(difficulty: number): void {
-      this.store.commit('SET_DIFFICULTY', difficulty);
-    },
-  },
-
   setup() {
     const store = useStore();
-    return { store };
+
+    const setDifficuly = (difficulty: number): void => {
+      store.commit(SET_DIFFICULTY, difficulty);
+    };
+
+    return { setDifficuly };
   },
 });
 </script>

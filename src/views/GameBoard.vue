@@ -48,26 +48,31 @@ import DifficultySelection from '@/components/Selection/DifficultySelection.vue'
 import StartGameButton from '@/components/Button/StartGameButton.vue';
 import { useStore } from '@/store';
 import FinishGameButton from '@/components/Button/FinishGameButton.vue';
+import { SET_GAME_NOT_RUNNING, SET_GAME_RUNNING } from '@/store/mutation-types';
 
 export default defineComponent({
   components: { FinishGameButton, StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection },
-  methods: {
-    start(): void {
-      this.store.commit('SET_GAME_RUNNING');
-      // this.service.startGame();
-    },
-    stop(): void {
-      this.store.commit('SET_GAME_NOT_RUNNING');
-      // this.service.startGame();
-    }
-  },
+
   setup() {
     const store = useStore();
+    const service = computed(() => store.state.service);
+    const isRunning = computed(() => store.state.isRunning);
+
+    const start = (): void => {
+      store.commit(SET_GAME_RUNNING);
+      // this.service.startGame();
+    };
+
+    const stop = (): void => {
+      store.commit(SET_GAME_NOT_RUNNING);
+      // this.service.startGame();
+    };
 
     return {
-      store,
-      service: computed(() => store.state.service),
-      isRunning: computed(() => store.state.isRunning)
+      service,
+      isRunning,
+      start,
+      stop,
     };
   },
 });
