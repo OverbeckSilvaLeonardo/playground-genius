@@ -1,14 +1,15 @@
 <template>
   <a
-    class="floating-icon"
-    :class="{
+      class="floating-icon"
+      :class="{
       expanding: isExpanding,
       retracting: isRetracting,
       expanded: isExpanded,
       retracted: isRetracted,
     }"
-    @mouseenter="setExpanding"
-    @mouseleave="setRetracting"
+      @mouseenter="setExpanding"
+      @mouseleave="setRetracting"
+      @click="$emit('openInformationModal')"
   >
     <div class="icon-content-wrapper">
       <i class="nes-icon coin"></i>
@@ -18,10 +19,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "FloatingIcon",
+  name: 'FloatingIcon',
+  emits: ['openInformationModal'],
   data() {
     return {
       isExpanding: false,

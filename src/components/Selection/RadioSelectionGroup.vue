@@ -8,7 +8,7 @@
           :name="name || 'radio-group'"
           :value="option.value"
           v-model="selectedOption"
-          @change="emitSelectedOption"
+          @change="$emit('onSelectionChange', selectedOption)"
       />
       <span>{{ option.label }}</span>
     </label>
@@ -20,7 +20,6 @@ import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'RadioSelectionGroup',
-
   emits: ['onSelectionChange'],
 
   props: {
@@ -42,7 +41,7 @@ export default defineComponent({
     },
   },
 
-  setup(props, { emit }) {
+  setup(props) {
     const selectedOption = ref(0);
     selectedOption.value = props.default || 1;
 
@@ -55,14 +54,9 @@ export default defineComponent({
       return options;
     });
 
-    const emitSelectedOption = (): void => {
-      emit('onSelectionChange', selectedOption.value);
-    };
-
     return {
       selectedOption,
       options,
-      emitSelectedOption,
     };
   },
 });

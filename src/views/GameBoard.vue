@@ -35,7 +35,8 @@
       </div>
     </div>
 
-    <floating-icon/>
+    <floating-icon />
+    <information-modal />
   </div>
 </template>
 
@@ -49,9 +50,10 @@ import StartGameButton from '@/components/Button/StartGameButton.vue';
 import { useStore } from '@/store';
 import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 import { SET_GAME_NOT_RUNNING, SET_GAME_RUNNING } from '@/store/mutation-types';
+import InformationModal from '@/components/Modal/InformationModal.vue';
 
 export default defineComponent({
-  components: { FinishGameButton, StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection },
+  components: { InformationModal, FinishGameButton, StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection },
 
   setup() {
     const store = useStore();
