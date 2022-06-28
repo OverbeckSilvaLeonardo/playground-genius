@@ -35,13 +35,13 @@
       </div>
     </div>
 
-    <floating-icon />
-    <information-modal />
+    <floating-icon @openInformationModal="toggleInfoModal"/>
+    <information-modal :visible="showInfoModal" :close="toggleInfoModal"/>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import GameTile from '@/components/Game/GameTile.vue';
 import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
 import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
@@ -60,6 +60,12 @@ export default defineComponent({
     const service = computed(() => store.state.service);
     const isRunning = computed(() => store.state.isRunning);
 
+    const showInfoModal = ref(false);
+
+    const toggleInfoModal = () => {
+      showInfoModal.value = !showInfoModal.value;
+    };
+
     const start = (): void => {
       store.commit(SET_GAME_RUNNING);
       // this.service.startGame();
@@ -73,8 +79,10 @@ export default defineComponent({
     return {
       service,
       isRunning,
+      showInfoModal,
       start,
       stop,
+      toggleInfoModal,
     };
   },
 });

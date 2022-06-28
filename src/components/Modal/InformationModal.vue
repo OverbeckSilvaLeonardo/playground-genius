@@ -1,5 +1,5 @@
 <template>
-  <section v-if="show" class="nes-dialog is-dark is-rounded" @openInformationModal="toggle">
+  <section v-if="visible" class="nes-dialog is-dark is-rounded" @click="close">
     <h1 class="is-centered m-4">Info</h1>
 
     <div class="info">
@@ -20,23 +20,21 @@
 
 <script lang="ts">
 
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'InformationModal',
 
-  setup() {
-    const show = ref(true);
-
-    const toggle = () => {
-      show.value = !show.value;
-    };
-
-    return {
-      show,
-      toggle
-    };
-  }
+  props: {
+    visible: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    close: {
+      required: true
+    }
+  },
 });
 
 </script>
