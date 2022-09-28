@@ -1,5 +1,8 @@
 <template>
-  <div class="tile" :class="this.color"></div>
+  <div class="column is-half">
+    <div class="tile" :class="this.color"></div>
+  </div>
+
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
