@@ -1,17 +1,15 @@
 <template>
   <div class="column is-half">
-    <div class="tile" :class="this.color"></div>
+    <div class="tile" :class="color"></div>
   </div>
 
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { defineProps } from 'vue';
 
-export default defineComponent({
-  name: "GameTile",
-  props: ["color"],
-});
+const props = defineProps(['color']);
 </script>
+
 <style scoped lang="scss">
 .tile {
   display: block;

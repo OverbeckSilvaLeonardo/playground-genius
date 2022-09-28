@@ -15,61 +15,45 @@
   </section>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { computed, defineProps, ref } from 'vue';
 
-export default defineComponent({
-  name: 'RadioSelectionGroup',
-  emits: ['onSelectionChange'],
-
-  props: {
-    numberOfOptions: {
-      type: Number,
-      required: true,
-    },
-    label: {
-      type: String,
-      required: false,
-    },
-    default: {
-      type: Number,
-      required: false,
-    },
-    name: {
-      type: String,
-      required: false,
-    },
+const props = defineProps({
+  numberOfOptions: {
+    type: Number,
+    required: true,
   },
-
-  setup(props) {
-    const selectedOption = ref(0);
-    selectedOption.value = props.default || 1;
-
-    const options = computed(() => {
-      let options = [];
-      for (let i = 1; i <= props.numberOfOptions; i++) {
-        options.push({ label: i, value: i });
-      }
-
-      return options;
-    });
-
-    return {
-      selectedOption,
-      options,
-    };
+  label: {
+    type: String,
+    required: false,
+  },
+  default: {
+    type: Number,
+    required: false,
+  },
+  name: {
+    type: String,
+    required: false,
   },
 });
+
+const selectedOption = ref(0);
+selectedOption.value = props.default || 1;
+
+const options = computed(() => {
+  let options = [];
+  for (let i = 1; i <= props.numberOfOptions; i++) {
+    options.push({ label: i, value: i });
+  }
+
+  return options;
+});
+
 </script>
 
 <style scoped lang="scss">
 label {
   margin: 0.5rem;
-
-  &.white-text {
-    color: var(--background-secondary);
-    margin-right: 0.5rem;
-  }
 }
 
 .nes-container {

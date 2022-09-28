@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+import { computed, ref } from 'vue';
 import GameTile from '@/components/Game/GameTile.vue';
 import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
 import GameModeSelection from '@/components/Selection/GameModeSelection.vue';

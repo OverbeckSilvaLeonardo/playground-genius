@@ -5,18 +5,11 @@
   </main>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue';
 import NavBar from '@/components/Navigation/NavBar.vue';
 import GameBoard from '@/views/GameBoard.vue';
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    GameBoard,
-    NavBar,
-  },
-});
 </script>
 
 <style lang="scss">
