@@ -16,9 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, defineEmits, ref } from 'vue';
-
-defineEmits(['onSelecionChange']);
+import {computed, defineProps, ref} from 'vue';
 
 const props = defineProps({
   numberOfOptions: {

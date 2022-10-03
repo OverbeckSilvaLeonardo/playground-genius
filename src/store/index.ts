@@ -26,12 +26,9 @@ const mutations = {
         state.gameMode = gameMode;
         state.service = GameModeFactory.build(gameMode);
     },
-    [types.SET_GAME_RUNNING](): void {
-        state.isRunning = true;
+    [types.SET_GAME_RUNNING](state: GameState, running: boolean): void {
+        state.isRunning = running;
     },
-    [types.SET_GAME_NOT_RUNNING](): void {
-        state.isRunning = false;
-    }
 };
 
 const actions = {
@@ -40,6 +37,9 @@ const actions = {
     },
     setGameMode({commit}: { commit: Commit }, gameMode: number): void {
         commit(types.SET_GAME_MODE, gameMode)
+    },
+    setGameRunning({commit}: { commit: Commit }, running: boolean): void {
+        commit(types.SET_GAME_RUNNING, running);
     }
 }
 export const store = createStore<GameState>({
