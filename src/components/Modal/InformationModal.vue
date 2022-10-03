@@ -18,25 +18,19 @@
   </section>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { defineProps } from 'vue';
 
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'InformationModal',
-
-  props: {
-    visible: {
-      type: Boolean,
-      required: true,
-      default: false
-    },
-    close: {
-      required: true
-    }
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    required: true,
+    default: false
   },
+  close: {
+    required: true
+  }
 });
-
 </script>
 
 <style scoped lang="scss">

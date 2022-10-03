@@ -1,12 +1,8 @@
 <template>
   <button type="button" class="nes-btn is-warning" @click="$emit('startGame')">Start Game</button>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { defineEmits } from 'vue';
 
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'StartGameButton',
-  emits: ['startGame'],
-});
+defineEmits(['finishGame'])
 </script>

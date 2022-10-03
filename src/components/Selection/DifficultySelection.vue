@@ -1,5 +1,5 @@
 <template>
-  <radio-selection-group
+  <RadioSelectionGroup
       :number-of-options="5"
       name="difficulty-selection"
       label="Difficulty"
@@ -7,26 +7,17 @@
   />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
 import { useStore } from '@/store';
 import { SET_DIFFICULTY } from '@/store/mutation-types';
 
-export default defineComponent({
-  name: 'DifficultySelection',
-  components: { RadioSelectionGroup },
+const store = useStore();
 
-  setup() {
-    const store = useStore();
+const setDifficuly = (difficulty: number): void => {
+  store.commit(SET_DIFFICULTY, difficulty);
+};
 
-    const setDifficuly = (difficulty: number): void => {
-      store.commit(SET_DIFFICULTY, difficulty);
-    };
-
-    return { setDifficuly };
-  },
-});
 </script>
 
 <style scoped lang="scss">

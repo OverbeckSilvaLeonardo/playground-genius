@@ -5,43 +5,33 @@
 
     <div class="columns is-multiline is-gapless px-4">
       <div class="column is-full my-4">
-        <game-mode-selection/>
+        <GameModeSelection/>
       </div>
 
       <div class="column is-full my-4">
-        <difficulty-selection/>
+        <DifficultySelection/>
       </div>
 
       <div class="column is-full my-4">
-        <start-game-button v-if="!isRunning" @startGame="start"/>
-        <finish-game-button v-else @finishGame="stop"/>
+        <StartGameButton v-if="!isRunning" @startGame="start"/>
+        <FinishGameButton v-else @finishGame="stop"/>
       </div>
     </div>
 
     <div class="columns is-multiline is-centered is-gapless is-mobile">
-      <div class="column is-half">
-        <game-tile color="green"/>
-      </div>
-
-      <div class="column is-half">
-        <game-tile color="red"/>
-      </div>
-
-      <div class="column is-half">
-        <game-tile color="yellow"/>
-      </div>
-      <div class="column is-half">
-        <game-tile color="blue"/>
-      </div>
+        <GameTile color="green"/>
+        <GameTile color="red"/>
+        <GameTile color="yellow"/>
+        <GameTile color="blue"/>
     </div>
 
-    <floating-icon @openInformationModal="toggleInfoModal"/>
-    <information-modal :visible="showInfoModal" :close="toggleInfoModal"/>
+    <FloatingIcon @openInformationModal="toggleInfoModal"/>
+    <InformationModal :visible="showInfoModal" :close="toggleInfoModal"/>
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { computed, ref } from 'vue';
 import GameTile from '@/components/Game/GameTile.vue';
 import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
 import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
@@ -52,40 +42,26 @@ import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 import { SET_GAME_NOT_RUNNING, SET_GAME_RUNNING } from '@/store/mutation-types';
 import InformationModal from '@/components/Modal/InformationModal.vue';
 
-export default defineComponent({
-  components: { InformationModal, FinishGameButton, StartGameButton, DifficultySelection, FloatingIcon, GameTile, GameModeSelection },
+const store = useStore();
+const service = computed(() => store.state.service);
+const isRunning = computed(() => store.state.isRunning);
 
-  setup() {
-    const store = useStore();
-    const service = computed(() => store.state.service);
-    const isRunning = computed(() => store.state.isRunning);
+const showInfoModal = ref(false);
 
-    const showInfoModal = ref(false);
+const toggleInfoModal = () => {
+  showInfoModal.value = !showInfoModal.value;
+};
 
-    const toggleInfoModal = () => {
-      showInfoModal.value = !showInfoModal.value;
-    };
+const start = (): void => {
+  store.commit(SET_GAME_RUNNING);
+  // this.service.startGame();
+};
 
-    const start = (): void => {
-      store.commit(SET_GAME_RUNNING);
-      // this.service.startGame();
-    };
+const stop = (): void => {
+  store.commit(SET_GAME_NOT_RUNNING);
+  // this.service.startGame();
+};
 
-    const stop = (): void => {
-      store.commit(SET_GAME_NOT_RUNNING);
-      // this.service.startGame();
-    };
-
-    return {
-      service,
-      isRunning,
-      showInfoModal,
-      start,
-      stop,
-      toggleInfoModal,
-    };
-  },
-});
 </script>
 
 <style scoped lang="scss">
