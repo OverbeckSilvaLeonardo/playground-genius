@@ -31,15 +31,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import {computed, ref} from 'vue';
 import GameTile from '@/components/Game/GameTile.vue';
 import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
 import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
 import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
 import StartGameButton from '@/components/Button/StartGameButton.vue';
-import { useStore } from '@/store';
+import {useStore} from '@/store';
 import FinishGameButton from '@/components/Button/FinishGameButton.vue';
-import { SET_GAME_NOT_RUNNING, SET_GAME_RUNNING } from '@/store/mutation-types';
 import InformationModal from '@/components/Modal/InformationModal.vue';
 
 const store = useStore();
@@ -53,12 +52,12 @@ const toggleInfoModal = () => {
 };
 
 const start = (): void => {
-  store.commit(SET_GAME_RUNNING);
+  store.dispatch('setGameRunning', true);
   // this.service.startGame();
 };
 
 const stop = (): void => {
-  store.commit(SET_GAME_NOT_RUNNING);
+  store.dispatch('setGameRunning', false);
   // this.service.startGame();
 };
 

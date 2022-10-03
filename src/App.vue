@@ -1,12 +1,11 @@
 <template>
   <main>
-    <nav-bar/>
-    <game-board/>
+    <NavBar/>
+    <GameBoard/>
   </main>
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
 import NavBar from '@/components/Navigation/NavBar.vue';
 import GameBoard from '@/views/GameBoard.vue';
 

@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { defineProps } from 'vue';
 
-const props = defineProps(['color']);
+defineProps(['color']);
 </script>
 
 <style scoped lang="scss">

@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, ref } from 'vue';
+import {computed, defineProps, ref} from 'vue';
 
 const props = defineProps({
   numberOfOptions: {
