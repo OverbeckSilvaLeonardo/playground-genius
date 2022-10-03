@@ -4,7 +4,6 @@ import GameModeTwoService from '@/services/gamemodetwo.service';
 import GameModeThreeService from '@/services/gamemodethree.service';
 
 export default class GameModeFactory {
-
   static build(gamemode: number): IGameMode {
     if (gamemode === 1) {
       return new GameModeOneService();

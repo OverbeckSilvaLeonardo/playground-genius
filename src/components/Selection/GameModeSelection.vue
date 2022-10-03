@@ -8,15 +8,13 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue';
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
-import { useStore } from '@/store';
-import { SET_GAME_MODE } from '@/store/mutation-types';
+import {useStore} from '@/store';
 
-const store = useStore();
+const {dispatch} = useStore();
 
 const setGameMode = (gameMode: number): void => {
-  store.commit(SET_GAME_MODE, gameMode);
+  dispatch('setGameMode', gameMode);
 };
 
 </script>

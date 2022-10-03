@@ -9,13 +9,12 @@
 
 <script lang="ts" setup>
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
-import { useStore } from '@/store';
-import { SET_DIFFICULTY } from '@/store/mutation-types';
+import {useStore} from '@/store';
 
-const store = useStore();
+const {dispatch} = useStore();
 
 const setDifficuly = (difficulty: number): void => {
-  store.commit(SET_DIFFICULTY, difficulty);
+  dispatch('setDifficulty', difficulty);
 };
 
 </script>

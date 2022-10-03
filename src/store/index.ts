@@ -1,42 +1,55 @@
-import { createStore, useStore as vuexUseStore, Store } from 'vuex';
-import { InjectionKey } from 'vue';
+import {createStore, useStore as vuexUseStore, Store, Commit} from 'vuex';
+import {InjectionKey} from 'vue';
 import IGameMode from '@/services/gamemode.interface';
 import GameModeFactory from '@/services/gamemode.factory';
-import { SET_DIFFICULTY, SET_GAME_MODE, SET_GAME_NOT_RUNNING, SET_GAME_RUNNING } from '@/store/mutation-types';
+import * as types from '@/store/mutation-types';
 
 interface GameState {
-  gameMode: number;
-  difficulty: number;
-  isRunning: boolean;
-  service: IGameMode;
+    gameMode: number;
+    difficulty: number;
+    isRunning: boolean;
+    service: IGameMode;
 }
 
-export const store = createStore<GameState>({
-  state: {
+const state = {
     gameMode: 1,
     difficulty: 1,
     isRunning: false,
     service: GameModeFactory.build(1)
-  },
-  mutations: {
-    [SET_DIFFICULTY](state, difficulty: number): void {
-      store.state.difficulty = difficulty;
+};
+
+const mutations = {
+    [types.SET_DIFFICULTY](state: GameState, difficulty: number): void {
+        state.difficulty = difficulty;
     },
-    [SET_GAME_MODE](state, gameMode: number): void {
-      store.state.gameMode = gameMode;
-      store.state.service = GameModeFactory.build(gameMode);
+    [types.SET_GAME_MODE](state: GameState, gameMode: number): void {
+        state.gameMode = gameMode;
+        state.service = GameModeFactory.build(gameMode);
     },
-    [SET_GAME_RUNNING](): void {
-      store.state.isRunning = true;
+    [types.SET_GAME_RUNNING](): void {
+        state.isRunning = true;
     },
-    [SET_GAME_NOT_RUNNING](): void {
-      store.state.isRunning = false;
+    [types.SET_GAME_NOT_RUNNING](): void {
+        state.isRunning = false;
     }
-  }
+};
+
+const actions = {
+    setDifficulty({commit}: { commit: Commit }, difficulty: number): void {
+        commit(types.SET_DIFFICULTY, difficulty)
+    },
+    setGameMode({commit}: { commit: Commit }, gameMode: number): void {
+        commit(types.SET_GAME_MODE, gameMode)
+    }
+}
+export const store = createStore<GameState>({
+    state,
+    actions,
+    mutations
 });
 
 export const key: InjectionKey<Store<GameState>> = Symbol();
 
 export function useStore(): Store<GameState> {
-  return vuexUseStore(key);
+    return vuexUseStore(key);
 }
