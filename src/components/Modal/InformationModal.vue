@@ -1,21 +1,23 @@
 <template>
-  <section v-if="visible" class="nes-dialog is-dark is-rounded" @click="close">
-    <h1 class="is-centered m-4">Info</h1>
+  <Transition>
+    <section v-if="visible" class="nes-dialog is-dark is-rounded" @click="close">
+      <h1 class="is-centered m-4">Info</h1>
 
-    <div class="info">
-      <p>The classic color sequence memorization game recreated by me with some frontend magic.</p>
-      <ul>
-        <li>
-          <i class="nes-icon github is-small"></i>
-          GitHub: <a href="https://github.com/OverbeckSilvaLeonardo/playground-genius" target="_blank">playground-genius</a>
-        </li>
-        <li>
-          <i class="nes-icon linkedin is-small"></i>
-          My LinkedIn: <a href="https://www.linkedin.com/in/overbecksilvaleonardo/" target="_blank">overbecksilvaleonardo</a>
-        </li>
-      </ul>
-    </div>
-  </section>
+      <div class="info">
+        <p>The classic color sequence memorization game recreated by me with some frontend magic.</p>
+        <ul>
+          <li>
+            <i class="nes-icon github is-small"></i>
+            GitHub: <a href="https://github.com/OverbeckSilvaLeonardo/playground-genius" target="_blank">playground-genius</a>
+          </li>
+          <li>
+            <i class="nes-icon linkedin is-small"></i>
+            My LinkedIn: <a href="https://www.linkedin.com/in/overbecksilvaleonardo/" target="_blank">overbecksilvaleonardo</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </Transition>
 </template>
 
 <script lang="ts" setup>
@@ -75,8 +77,16 @@ ul {
   a {
     color: lightblue;
   }
+}
 
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.15s ease;
+}
 
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 
 </style>
