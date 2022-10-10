@@ -134,7 +134,7 @@ p {
 
 @keyframes retract {
   from {
-    width: calc(#{$float-anchor-size} * 2.35);
+    width: $float-anchor-size-expanded;
   }
 
   to {
