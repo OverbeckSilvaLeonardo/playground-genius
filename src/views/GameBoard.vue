@@ -5,11 +5,11 @@
 
     <div class="columns is-multiline is-gapless px-4">
       <div class="column is-full my-4">
-        <GameModeSelection/>
+        <GameModeSelection :key="0"/>
       </div>
 
       <div class="column is-full my-4">
-        <DifficultySelection/>
+        <DifficultySelection :key="1"/>
       </div>
 
       <div class="column is-full my-4">
@@ -41,9 +41,9 @@ import {useStore} from '@/store';
 import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 import InformationModal from '@/components/Modal/InformationModal.vue';
 
-const store = useStore();
-const service = computed(() => store.state.service);
-const isRunning = computed(() => store.state.isRunning);
+const {dispatch, state} = useStore();
+const { value: service } = computed(() => state.service);
+const isRunning = computed(() => state.isRunning);
 
 const showInfoModal = ref(false);
 
@@ -52,13 +52,13 @@ const toggleInfoModal = () => {
 };
 
 const start = (): void => {
-  store.dispatch('setGameRunning', true);
-  // this.service.startGame();
+  dispatch('setGameRunning', true);
+  service.start();
 };
 
 const stop = (): void => {
-  store.dispatch('setGameRunning', false);
-  // this.service.startGame();
+  dispatch('setGameRunning', false);
+  service.stop();
 };
 
 </script>

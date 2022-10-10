@@ -5,9 +5,28 @@
 
 </template>
 <script lang="ts" setup>
-import { defineProps } from 'vue';
+import {computed, defineProps} from 'vue';
+import {TileNumbersEnum, TileColorsEnum} from "@/utils/tiles.enums";
 
-defineProps(['color']);
+const props = defineProps({
+  color: {
+    type: String,
+    required: true,
+  },
+});
+
+const number = computed(() => {
+  switch (props.color) {
+    case TileColorsEnum.RED:
+      return TileNumbersEnum.RED;
+    case TileColorsEnum.YELLOW:
+      return TileNumbersEnum.YELLOW;
+    case TileColorsEnum.GREEN:
+      return TileNumbersEnum.GREEN;
+    default:
+      return TileNumbersEnum.BLUE;
+  }
+})
 </script>
 
 <style scoped lang="scss">
