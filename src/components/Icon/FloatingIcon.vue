@@ -2,8 +2,8 @@
   <a
       class="floating-icon"
       :class="cssClasses"
-      @mouseenter="setExpanding"
-      @mouseleave="setRetracting"
+      @mouseenter="expand"
+      @mouseleave="retract"
       @click="$emit('openInformationModal')"
   >
     <div class="icon-content-wrapper">
@@ -46,15 +46,11 @@ const setRetracted = () => {
   isExpanding.value = false;
 }
 
-const timeOutAnimation = (handler: () => void) => setTimeout(handler, animationTimeOut);
-
 const setExpanding = () => {
   isExpanding.value = true;
   isRetracted.value = false;
   isRetracting.value = false;
   isExpanded.value = false;
-
-  timeOutAnimation(() => setExpanded());
 };
 
 const setRetracting = () => {
@@ -62,9 +58,17 @@ const setRetracting = () => {
   isExpanded.value = false;
   isRetracted.value = false;
   isExpanding.value = false;
-
-  timeOutAnimation(() => setRetracted())
 };
+
+const expand = () => {
+  setExpanding();
+  setTimeout(() => setExpanded(), animationTimeOut);
+}
+
+const retract = () => {
+  setRetracting();
+  setTimeout(() => setRetracted(), animationTimeOut);
+}
 </script>
 
 <style scoped lang="scss">
