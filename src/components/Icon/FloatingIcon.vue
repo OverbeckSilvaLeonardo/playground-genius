@@ -1,12 +1,7 @@
 <template>
   <a
       class="floating-icon"
-      :class="{
-      expanding: isExpanding,
-      retracting: isRetracting,
-      expanded: isExpanded,
-      retracted: isRetracted,
-    }"
+      :class="cssClasses"
       @mouseenter="setExpanding"
       @mouseleave="setRetracting"
       @click="$emit('openInformationModal')"
@@ -18,54 +13,58 @@
   </a>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import {computed, defineEmits, ref} from 'vue';
 
-export default defineComponent({
-  name: 'FloatingIcon',
-  emits: ['openInformationModal'],
-  data() {
-    return {
-      isExpanding: false,
-      isRetracting: false,
-      isExpanded: false,
-      isRetracted: true,
-      animationDuration: 100,
-    };
-  },
-  methods: {
-    async setExpanding() {
-      this.isExpanding = true;
-      this.isRetracted = false;
-      this.isRetracting = false;
-      this.isExpanded = false;
+defineEmits(['openInformationModal']);
 
-      await this.sleep(this.animationDuration + 1);
+const isExpanding = ref(false);
+const isRetracting = ref(false);
+const isExpanded = ref(false);
+const isRetracted = ref(true);
+const animationDuration = ref(100);
+const animationTimeOut = animationDuration.value + 1;
 
-      this.isExpanded = true;
-      this.isExpanding = false;
-      this.isRetracted = false;
-      this.isRetracting = false;
-    },
+const cssClasses = computed(() => ({
+  expanding: isExpanding.value,
+  retracting: isRetracting.value,
+  expanded: isExpanded.value,
+  retracted: isRetracted.value,
+}));
 
-    async setRetracting() {
-      this.isRetracting = true;
-      this.isExpanded = false;
-      this.isRetracted = false;
-      this.isExpanding = false;
+const setExpanded = () => {
+  isExpanded.value = true;
+  isExpanding.value = false;
+  isRetracted.value = false;
+  isRetracting.value = false;
+}
 
-      await this.sleep(this.animationDuration + 1);
+const setRetracted = () => {
+  isRetracted.value = true;
+  isRetracting.value = false;
+  isExpanded.value = false;
+  isExpanding.value = false;
+}
 
-      this.isRetracted = true;
-      this.isRetracting = false;
-      this.isExpanded = false;
-      this.isExpanding = false;
-    },
-    sleep(ms: number) {
-      return new Promise((r) => setTimeout(r, ms));
-    },
-  },
-});
+const timeOutAnimation = (handler: () => void) => setTimeout(handler, animationTimeOut);
+
+const setExpanding = () => {
+  isExpanding.value = true;
+  isRetracted.value = false;
+  isRetracting.value = false;
+  isExpanded.value = false;
+
+  timeOutAnimation(() => setExpanded());
+};
+
+const setRetracting = () => {
+  isRetracting.value = true;
+  isExpanded.value = false;
+  isRetracted.value = false;
+  isExpanding.value = false;
+
+  timeOutAnimation(() => setRetracted())
+};
 </script>
 
 <style scoped lang="scss">
