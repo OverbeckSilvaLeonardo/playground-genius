@@ -1,6 +1,7 @@
 import IGameMode from "@/services/gamemode.interface";
 import {store} from "@/store";
 import {delay, getRandomInt} from "@/utils";
+import {SequencesEnum} from "@/utils/sequences.enum";
 
 export default class GamemodeBaseService implements IGameMode {
   public async start() {
@@ -12,14 +13,14 @@ export default class GamemodeBaseService implements IGameMode {
   }
 
   public async stop() {
-    await store.dispatch('clearSequence');
+    await store.dispatch('clearSequences');
     await store.dispatch('setPlayerTurn', null);
 
     return store.dispatch('setGameRunning', false);
   }
 
-  public addToSequence(number: number) {
-    return store.dispatch('addToSequence', number);
+  public addToSequence(number: number, sequenceType: SequencesEnum = SequencesEnum.GAME) {
+    return store.dispatch('addToSequence', {number, sequenceType});
   }
 
   public async replaySequence() {

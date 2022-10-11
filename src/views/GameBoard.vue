@@ -5,17 +5,17 @@
 
     <div class="columns is-multiline is-gapless px-4">
       <div class="column is-full my-4">
-        <GameModeSelection :key="0"/>
+        <GameModeSelection/>
       </div>
 
       <div class="column is-full my-4">
-        <DifficultySelection :key="1"/>
+        <DifficultySelection/>
       </div>
 
       <div class="column is-full my-4">
         <StartGameButton v-if="!isRunning" @click="start"/>
         <FinishGameButton v-else @finishGame="stop"/>
-        <p style="float: right">Player turn <span class="player-turn-indicator">{{ playerTurn || 'PC' }}</span></p>
+        <p style="float: right"> Turn <span class="player-turn-indicator">{{ playerTurn ? `P${playerTurn}` : 'PC' }}</span></p>
       </div>
 
       <div class="column">
@@ -24,10 +24,10 @@
     </div>
 
     <div class="columns is-multiline is-centered is-gapless is-mobile">
-      <GameTile color="green" :current="current"/>
-      <GameTile color="red" :current="current"/>
-      <GameTile color="yellow" :current="current"/>
-      <GameTile color="blue" :current="current"/>
+      <GameTile :color="TileColorsEnum.GREEN"/>
+      <GameTile :color="TileColorsEnum.RED"/>
+      <GameTile :color="TileColorsEnum.YELLOW"/>
+      <GameTile :color="TileColorsEnum.BLUE"/>
     </div>
 
     <FloatingIcon @openInformationModal="toggleInfoModal"/>
@@ -45,12 +45,12 @@ import StartGameButton from '@/components/Button/StartGameButton.vue';
 import {useStore} from '@/store';
 import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 import InformationModal from '@/components/Modal/InformationModal.vue';
+import { TileColorsEnum } from '@/utils/tiles.enums';
 
 const {dispatch, state} = useStore();
 
 const {value: service} = computed(() => state.service);
 const isRunning = computed(() => state.isRunning);
-const current = computed(() => state.current);
 const playerTurn = computed(() => state.playerTurn);
 
 const showInfoModal = ref(false);

@@ -13,14 +13,11 @@ import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue'
 import {useStore} from '@/store';
 import {ref, watch} from "vue";
 
-const {dispatch, state} = useStore();
+const {dispatch} = useStore();
 
-const selected = ref(state.difficulty);
+const selected = ref(1);
 
-watch(selected, () => {
-  dispatch('setDifficulty', selected.value);
-})
-
+watch(selected, () => dispatch('setDifficulty', selected.value));
 </script>
 
 <style scoped lang="scss">

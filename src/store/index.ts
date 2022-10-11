@@ -1,8 +1,9 @@
-import {createStore, useStore as vuexUseStore, Store, Commit} from 'vuex';
+import {Commit, createStore, Store, useStore as vuexUseStore} from 'vuex';
 import {InjectionKey} from 'vue';
 import IGameMode from '@/services/gamemode.interface';
 import GameModeFactory from '@/services/gamemode.factory';
 import * as types from '@/store/mutation-types';
+import {SequencesEnum} from "@/utils/sequences.enum";
 
 export interface GameState {
   gameMode: number;
@@ -11,6 +12,7 @@ export interface GameState {
   service: IGameMode;
   current: number | null;
   sequence: number[];
+  playerSequence: number[];
   playerTurn: null | number;
 }
 
@@ -21,7 +23,8 @@ const state = {
   service: GameModeFactory.build(1),
   current: null,
   sequenceLength: 0,
-  sequence: [0, 1, 2, 3, 3, 2, 1, 0],
+  sequence: [],
+  playerSequence: [],
   playerTurn: null,
 };
 
@@ -42,8 +45,12 @@ const mutations = {
   [types.ADD_TO_SEQUENCE](state: GameState, num: number): void {
     state.sequence.push(num);
   },
-  [types.CLEAR_SEQUENCE](state: GameState): void {
+  [types.ADD_TO_PLAYER_SEQUENCE](state: GameState, num: number): void {
+    state.playerSequence.push(num);
+  },
+  [types.CLEAR_SEQUENCES](): void {
     state.sequence = []
+    state.playerSequence = []
   },
   [types.SET_CURRENT](state: GameState, current: number): void {
     state.current = current
@@ -80,11 +87,15 @@ const actions = {
   },
 
   // SEQUENCE state
-  addToSequence({commit}: { commit: Commit }, num: number): void {
-    commit(types.ADD_TO_SEQUENCE, num);
+  addToSequence({commit}: { commit: Commit }, {number, sequenceType}: {number: number, sequenceType: SequencesEnum}): void {
+    if (sequenceType === SequencesEnum.PLAYER) {
+      return commit(types.ADD_TO_PLAYER_SEQUENCE, number);
+    }
+
+    return commit(types.ADD_TO_SEQUENCE, number);
   },
-  clearSequence({commit}: { commit: Commit }): void {
-    commit(types.CLEAR_SEQUENCE);
+  clearSequences({commit}: { commit: Commit }): void {
+    commit(types.CLEAR_SEQUENCES);
   },
   setCurrentNumber({commit}: { commit: Commit }, num: number): void {
     commit(types.SET_CURRENT, num);

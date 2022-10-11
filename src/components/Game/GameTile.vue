@@ -1,22 +1,30 @@
 <template>
   <div class="column is-half">
-    <div class="tile" :class="[color, focused || isCurrent ? 'focused' : '']" @mouseenter="focused = true" @mouseleave="focused = false"></div>
+    <div
+      class="tile"
+      :class="[color, focused || isCurrent ? 'focused' : '']"
+      @mouseenter="focused = true"
+      @mouseleave="focused = false"
+      @click="addToSequence"
+    >
+
+    </div>
   </div>
 
 </template>
 <script lang="ts" setup>
-import {computed, defineProps, ref} from 'vue';
+import {computed, defineProps, PropType, ref} from 'vue';
 import {TileNumbersEnum, TileColorsEnum} from "@/utils/tiles.enums";
+import {SequencesEnum} from "@/utils/sequences.enum";
+import {useStore} from "@/store";
+
+const {state, dispatch} = useStore();
 
 const props = defineProps({
   color: {
-    type: String,
+    type: String as PropType<TileColorsEnum>,
     required: true,
   },
-  current: {
-    type: Number,
-    required: false,
-  }
 });
 
 const number = computed(() => {
@@ -33,8 +41,9 @@ const number = computed(() => {
 })
 
 const focused = ref(false);
-const isCurrent = computed(() => props.current === number.value)
+const isCurrent = computed(() => state.current === number.value)
 
+const addToSequence = () => dispatch('addToSequence', {number: number.value, sequenceType: SequencesEnum.PLAYER})
 </script>
 
 <style scoped lang="scss">
