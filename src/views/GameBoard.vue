@@ -13,16 +13,21 @@
       </div>
 
       <div class="column is-full my-4">
-        <StartGameButton v-if="!isRunning" @startGame="start"/>
+        <StartGameButton v-if="!isRunning" @click="start"/>
         <FinishGameButton v-else @finishGame="stop"/>
+        <p style="float: right">Player turn <span class="player-turn-indicator">{{ playerTurn || 'PC' }}</span></p>
+      </div>
+
+      <div class="column">
+
       </div>
     </div>
 
     <div class="columns is-multiline is-centered is-gapless is-mobile">
-        <GameTile color="green"/>
-        <GameTile color="red"/>
-        <GameTile color="yellow"/>
-        <GameTile color="blue"/>
+      <GameTile color="green" :current="current"/>
+      <GameTile color="red" :current="current"/>
+      <GameTile color="yellow" :current="current"/>
+      <GameTile color="blue" :current="current"/>
     </div>
 
     <FloatingIcon @openInformationModal="toggleInfoModal"/>
@@ -42,8 +47,11 @@ import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 import InformationModal from '@/components/Modal/InformationModal.vue';
 
 const {dispatch, state} = useStore();
-const { value: service } = computed(() => state.service);
+
+const {value: service} = computed(() => state.service);
 const isRunning = computed(() => state.isRunning);
+const current = computed(() => state.current);
+const playerTurn = computed(() => state.playerTurn);
 
 const showInfoModal = ref(false);
 
@@ -72,6 +80,13 @@ const stop = (): void => {
     color: var(--background-secondary);
     text-align: center;
     font-size: 2rem;
+  }
+
+  .player-turn-indicator {
+    color: white;
+    display: inline-block;
+    width: 30px;
+    text-align: right
   }
 }
 

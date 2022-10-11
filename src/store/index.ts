@@ -9,16 +9,24 @@ export interface GameState {
   difficulty: number;
   isRunning: boolean;
   service: IGameMode;
+  current: number | null;
+  sequence: number[];
+  playerTurn: null | number;
 }
 
 const state = {
   gameMode: 1,
   difficulty: 1,
   isRunning: false,
-  service: GameModeFactory.build(1)
+  service: GameModeFactory.build(1),
+  current: null,
+  sequenceLength: 0,
+  sequence: [0, 1, 2, 3, 3, 2, 1, 0],
+  playerTurn: null,
 };
 
 const mutations = {
+  // GAME Mutations
   [types.SET_DIFFICULTY](state: GameState, difficulty: number): void {
     state.difficulty = difficulty;
   },
@@ -29,9 +37,30 @@ const mutations = {
   [types.SET_GAME_RUNNING](state: GameState, running: boolean): void {
     state.isRunning = running;
   },
+
+  //SEQUENCE mutations
+  [types.ADD_TO_SEQUENCE](state: GameState, num: number): void {
+    state.sequence.push(num);
+  },
+  [types.CLEAR_SEQUENCE](state: GameState): void {
+    state.sequence = []
+  },
+  [types.SET_CURRENT](state: GameState, current: number): void {
+    state.current = current
+  },
+  [types.SET_PLAYER_TURN](state: GameState, player: number): void {
+    state.playerTurn = player
+  }
 };
 
+const getters = {
+  sequenceLength(state: GameState): number {
+    return state.sequence.length;
+  }
+}
+
 const actions = {
+  // GAME state
   setDifficulty({commit, state}: { commit: Commit, state: GameState }, difficulty: number): void {
     if (state.isRunning) {
       return
@@ -48,11 +77,26 @@ const actions = {
   },
   setGameRunning({commit}: { commit: Commit }, running: boolean): void {
     commit(types.SET_GAME_RUNNING, running);
+  },
+
+  // SEQUENCE state
+  addToSequence({commit}: { commit: Commit }, num: number): void {
+    commit(types.ADD_TO_SEQUENCE, num);
+  },
+  clearSequence({commit}: { commit: Commit }): void {
+    commit(types.CLEAR_SEQUENCE);
+  },
+  setCurrentNumber({commit}: { commit: Commit }, num: number): void {
+    commit(types.SET_CURRENT, num);
+  },
+  setPlayerTurn({commit}: {commit: Commit}, player: number): void {
+    commit(types.SET_PLAYER_TURN, player);
   }
 }
 export const store = createStore<GameState>({
   state,
   actions,
+  getters,
   mutations
 });
 
