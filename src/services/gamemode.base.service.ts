@@ -7,9 +7,20 @@ export default class GamemodeBaseService implements IGameMode {
   public async start() {
     await store.dispatch('setGameRunning', true);
 
+    await delay(1000);
+
     await this.addToSequence(getRandomInt());
     await this.replaySequence();
-    await this.setPlayerTurn(1)
+    await this.setPlayerTurn(1);
+  }
+
+  public async nextStep() {
+    await delay(1000);
+    await this.setPlayerTurn(null);
+    await store.dispatch('clearPlayerSequence');
+    await this.addToSequence(getRandomInt());
+    await this.replaySequence();
+    await this.setPlayerTurn(1);
   }
 
   public async stop() {
@@ -35,7 +46,27 @@ export default class GamemodeBaseService implements IGameMode {
     }
   }
 
-  protected setPlayerTurn(player: number) {
+  public validateSequence() {
+    let correct = true;
+
+    store.state.sequence.map((value, index) => {
+      if (store.state.playerSequence[index] && store.state.playerSequence[index] !== value) {
+        correct = false;
+      }
+    })
+
+    store.dispatch('setSequenceIsValid', correct);
+
+    if (!correct) {
+      return this.stop();
+    }
+
+    if (store.getters.playerSequenceLength === store.getters.sequenceLength) {
+      return this.nextStep();
+    }
+  }
+
+  protected setPlayerTurn(player: number | null) {
     return store.dispatch('setPlayerTurn', player);
   }
 }

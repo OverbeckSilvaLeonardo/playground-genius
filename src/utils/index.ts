@@ -1,5 +1,5 @@
 export function getRandomInt(): number {
-  return Math.floor(Math.random() * 4) + 1;
+  return Math.floor(Math.random() * 4);
 }
 
 export function delay(ms: number): Promise<void> {

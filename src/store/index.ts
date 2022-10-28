@@ -11,9 +11,10 @@ export interface GameState {
   isRunning: boolean;
   service: IGameMode;
   current: number | null;
+  playerTurn: number | null;
   sequence: number[];
   playerSequence: number[];
-  playerTurn: null | number;
+  pSequenceIsValid: boolean;
 }
 
 const state = {
@@ -22,10 +23,11 @@ const state = {
   isRunning: false,
   service: GameModeFactory.build(1),
   current: null,
+  playerTurn: null,
   sequenceLength: 0,
   sequence: [],
   playerSequence: [],
-  playerTurn: null,
+  pSequenceIsValid: false,
 };
 
 const mutations = {
@@ -52,17 +54,26 @@ const mutations = {
     state.sequence = []
     state.playerSequence = []
   },
+  [types.CLEAR_P_SEQUENCE](): void {
+    state.playerSequence = []
+  },
   [types.SET_CURRENT](state: GameState, current: number): void {
     state.current = current
   },
   [types.SET_PLAYER_TURN](state: GameState, player: number): void {
     state.playerTurn = player
+  },
+  [types.SET_P_SEQUENCE_IS_VALID](state: GameState, pSequenceIsValid: boolean): void {
+    state.pSequenceIsValid = pSequenceIsValid
   }
 };
 
 const getters = {
   sequenceLength(state: GameState): number {
     return state.sequence.length;
+  },
+  playerSequenceLength(state: GameState): number {
+    return state.playerSequence.length;
   }
 }
 
@@ -97,11 +108,17 @@ const actions = {
   clearSequences({commit}: { commit: Commit }): void {
     commit(types.CLEAR_SEQUENCES);
   },
+  clearPlayerSequence({commit}: { commit: Commit }): void {
+    commit(types.CLEAR_P_SEQUENCE);
+  },
   setCurrentNumber({commit}: { commit: Commit }, num: number): void {
     commit(types.SET_CURRENT, num);
   },
-  setPlayerTurn({commit}: {commit: Commit}, player: number): void {
+  setPlayerTurn({commit}: {commit: Commit}, player: number | null): void {
     commit(types.SET_PLAYER_TURN, player);
+  },
+  setSequenceIsValid({commit}: {commit: Commit}, valid: boolean) {
+    commit(types.SET_P_SEQUENCE_IS_VALID, valid);
   }
 }
 export const store = createStore<GameState>({
