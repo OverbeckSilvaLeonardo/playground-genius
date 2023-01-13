@@ -2,7 +2,7 @@ import GameModeFactory from '@/services/gamemode.factory';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
- const useGameStore = defineStore('game', () => {
+const useGameStore = defineStore('game', () => {
   const gameMode = ref(1);
   const difficulty = ref(1);
   const isRunning = ref(false);

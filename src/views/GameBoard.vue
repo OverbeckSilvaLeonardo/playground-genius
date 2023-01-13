@@ -31,15 +31,15 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue';
+import FinishGameButton from '@/components/Button/FinishGameButton.vue';
+import StartGameButton from '@/components/Button/StartGameButton.vue';
 import GameTile from '@/components/Game/GameTile.vue';
 import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
-import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
-import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
-import StartGameButton from '@/components/Button/StartGameButton.vue';
-import {useStore} from '@/store';
-import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 import InformationModal from '@/components/Modal/InformationModal.vue';
+import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
+import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
+import { useStore } from '@/store';
+import { computed, ref } from 'vue';
 
 const store = useStore();
 const service = computed(() => store.state.service);

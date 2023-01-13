@@ -2,7 +2,6 @@
   <div class="column is-half">
     <div class="tile" :class="color"></div>
   </div>
-
 </template>
 <script lang="ts" setup>
 import { defineProps } from 'vue';

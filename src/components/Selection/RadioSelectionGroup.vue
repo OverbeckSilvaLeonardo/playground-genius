@@ -3,12 +3,12 @@
     <h3 class="title">{{ label }}</h3>
     <label v-for="(option, index) in options" :key="index">
       <input
-          type="radio"
-          class="nes-radio is-dark"
-          :name="name || 'radio-group'"
-          :value="option.value"
-          v-model="selectedOption"
-          @change="$emit('onSelectionChange', selectedOption)"
+        type="radio"
+        class="nes-radio is-dark"
+        :name="name || 'radio-group'"
+        :value="option.value"
+        v-model="selectedOption"
+        @change="$emit('onSelectionChange', selectedOption)"
       />
       <span>{{ option.label }}</span>
     </label>
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, defineProps, ref} from 'vue';
+import { computed, defineProps, ref } from 'vue';
 
 const props = defineProps({
   numberOfOptions: {
@@ -48,7 +48,6 @@ const options = computed(() => {
 
   return options;
 });
-
 </script>
 
 <style scoped lang="scss">

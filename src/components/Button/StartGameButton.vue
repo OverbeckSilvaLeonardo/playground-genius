@@ -4,5 +4,5 @@
 <script lang="ts" setup>
 import { defineEmits } from 'vue';
 
-defineEmits(['startGame'])
+defineEmits(['startGame']);
 </script>
