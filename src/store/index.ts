@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {Commit, createStore, Store, useStore as vuexUseStore} from 'vuex';
 import {InjectionKey} from 'vue';
 import IGameMode from '@/services/gamemode.interface';
@@ -133,3 +134,8 @@ export const key: InjectionKey<Store<GameState>> = Symbol();
 export function useStore(): Store<GameState> {
   return vuexUseStore(key);
 }
+=======
+import { createPinia } from 'pinia';
+
+export const pinia = createPinia();
+>>>>>>> feature/migrating-store-to-pinia

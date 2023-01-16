@@ -68,7 +68,6 @@ const options = computed(() => {
 
   return options;
 });
-
 </script>
 
 <style scoped lang="scss">

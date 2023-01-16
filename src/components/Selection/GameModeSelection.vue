@@ -10,14 +10,14 @@
 
 <script lang="ts" setup>
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
-import {useStore} from '@/store';
 import {ref, watch} from "vue";
+import useGameStore from '@/store/game';
 
-const {dispatch} = useStore();
+const gameStore = useGameStore();
 
 const selected = ref(1);
 
-watch(selected, () => dispatch('setGameMode', selected.value));
+watch(selected, () => gameStore.setGameMode(selected.value));
 </script>
 
 <style scoped lang="scss">

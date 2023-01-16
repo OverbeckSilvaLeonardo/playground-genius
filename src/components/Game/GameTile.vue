@@ -10,7 +10,6 @@
 
     </div>
   </div>
-
 </template>
 <script lang="ts" setup>
 import {computed, defineProps, PropType, ref} from 'vue';

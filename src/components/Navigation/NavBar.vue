@@ -1,12 +1,7 @@
 <template>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="container">
-      <a
-        class="nes-pointer navbar-item"
-        href="https://overbecksilvaleonardo.dev"
-      >
-        Dashboard
-      </a>
+      <a class="nes-pointer navbar-item" href="https://overbecksilvaleonardo.dev"> Dashboard </a>
     </div>
   </nav>
 </template>

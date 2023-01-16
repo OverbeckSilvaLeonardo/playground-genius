@@ -36,15 +36,12 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue';
+import FinishGameButton from '@/components/Button/FinishGameButton.vue';
+import StartGameButton from '@/components/Button/StartGameButton.vue';
 import GameTile from '@/components/Game/GameTile.vue';
 import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
-import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
-import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
-import StartGameButton from '@/components/Button/StartGameButton.vue';
-import {useStore} from '@/store';
-import FinishGameButton from '@/components/Button/FinishGameButton.vue';
 import InformationModal from '@/components/Modal/InformationModal.vue';
+<<<<<<< HEAD
 import { TileColorsEnum } from '@/utils/tiles.enums';
 
 const {dispatch, state} = useStore();
@@ -52,6 +49,16 @@ const {dispatch, state} = useStore();
 const {value: service} = computed(() => state.service);
 const isRunning = computed(() => state.isRunning);
 const playerTurn = computed(() => state.playerTurn);
+=======
+import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
+import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
+import useGameStore from '@/store/game';
+import { computed, ref } from 'vue';
+
+const gameStore = useGameStore();
+// const service = computed(() => gameStore.service);
+const isRunning = computed(() => gameStore.isRunning);
+>>>>>>> feature/migrating-store-to-pinia
 
 const showInfoModal = ref(false);
 
@@ -60,6 +67,7 @@ const toggleInfoModal = () => {
 };
 
 const start = (): void => {
+<<<<<<< HEAD
   dispatch('setGameRunning', true);
   service.start();
 };
@@ -67,6 +75,15 @@ const start = (): void => {
 const stop = (): void => {
   dispatch('setGameRunning', false);
   service.stop();
+=======
+  gameStore.setGameIsRunning(true);
+  // this.service.startGame();
+};
+
+const stop = (): void => {
+  gameStore.setGameIsRunning(false);
+  // this.service.startGame();
+>>>>>>> feature/migrating-store-to-pinia
 };
 
 </script>
