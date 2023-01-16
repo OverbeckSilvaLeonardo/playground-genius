@@ -9,12 +9,12 @@
 
 <script lang="ts" setup>
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
-import { useStore } from '@/store';
+import useGameStore from '@/store/game';
 
-const { dispatch } = useStore();
+const gameStore = useGameStore();
 
 const setGameMode = (gameMode: number): void => {
-  dispatch('setGameMode', gameMode);
+  gameStore.setGameMode(gameMode);
 };
 </script>
 

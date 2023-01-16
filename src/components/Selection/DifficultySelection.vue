@@ -9,14 +9,11 @@
 
 <script lang="ts" setup>
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
-import { useStore } from '@/store';
 import useGameStore from '@/store/game';
 
-const { dispatch } = useStore();
 const gameStore = useGameStore();
 
 const setDifficuly = (difficulty: number): void => {
-  dispatch('setDifficulty', difficulty);
   gameStore.setDifficulty(difficulty);
 };
 </script>

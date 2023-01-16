@@ -38,12 +38,12 @@ import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
 import InformationModal from '@/components/Modal/InformationModal.vue';
 import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
 import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
-import { useStore } from '@/store';
+import useGameStore from '@/store/game';
 import { computed, ref } from 'vue';
 
-const store = useStore();
-const service = computed(() => store.state.service);
-const isRunning = computed(() => store.state.isRunning);
+const gameStore = useGameStore();
+// const service = computed(() => gameStore.service);
+const isRunning = computed(() => gameStore.isRunning);
 
 const showInfoModal = ref(false);
 
@@ -52,12 +52,12 @@ const toggleInfoModal = () => {
 };
 
 const start = (): void => {
-  store.dispatch('setGameRunning', true);
+  gameStore.setGameIsRunning(true);
   // this.service.startGame();
 };
 
 const stop = (): void => {
-  store.dispatch('setGameRunning', false);
+  gameStore.setGameIsRunning(false);
   // this.service.startGame();
 };
 
