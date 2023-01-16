@@ -34,7 +34,7 @@ const useGameStore = defineStore('game', () => {
     return isRunning.value;
   }
 
-  function setPlayerTurn(player: SequencesEnum) {    
+  function setPlayerTurn(player: SequencesEnum) {
     playerTurn.value = player;
   }
 
