@@ -1,5 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia';
 import useGameStore from '@/store/game';
+import { SequencesEnum } from '@/utils/sequences.enum';
 
 describe('Main Game Store', () => {
   beforeEach(() => setActivePinia(createPinia()));
@@ -56,4 +57,23 @@ describe('Main Game Store', () => {
     store.setGameIsRunning(newIsRunning);
     expect(store.isRunning).toBeFalsy();
   });
+
+  it('should be able to update current player turn', () => {
+    const store = useGameStore();
+    const playerTurn = SequencesEnum.PLAYER;
+
+    store.setPlayerTurn(playerTurn);
+
+    expect(store.playerTurn).toBe(SequencesEnum.PLAYER);
+  });
+
+  it('should not be able to pass values other than SequencesEnum to player turn', () => {
+    const store = useGameStore();
+    const playerTurn = 3;
+
+    expect(() => store.setPlayerTurn(playerTurn)).toThrow(Error)
+
+    console.log(store.playerTurn);
+    
+  })
 });

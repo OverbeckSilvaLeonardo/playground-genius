@@ -35,6 +35,10 @@ const useGameStore = defineStore('game', () => {
   }
 
   function setPlayerTurn(player: SequencesEnum) {
+    if (!(player in SequencesEnum)) {
+      throw Error('Invalid player turn value.')
+    }
+
     playerTurn.value = player;
   }
 
