@@ -1,72 +1,67 @@
-import IGameMode from "@/services/gamemode.interface";
-import {store} from "@/store";
-import {delay, getRandomInt} from "@/utils";
-import {SequencesEnum} from "@/utils/sequences.enum";
+import IGameMode from '@/services/gamemode.interface';
+import useGameStore from '@/store/game';
+import useSequenceStore from '@/store/sequence';
+import { delay, getRandomInt } from '@/utils';
+import { SequencesEnum } from '@/utils/sequences.enum';
 
 export default class GamemodeBaseService implements IGameMode {
+  private gameStore = useGameStore();
+  private sequenceStore = useSequenceStore();
+
   public async start() {
-    await store.dispatch('setGameRunning', true);
+    this.gameStore.setGameIsRunning(true);
 
     await delay(1000);
 
-    await this.addToSequence(getRandomInt());
-    await this.replaySequence();
-    await this.setPlayerTurn(1);
+    this.sequenceStore.addToSequence(getRandomInt(), SequencesEnum.GAME);
+    this.replaySequence();
+    this.gameStore.setPlayerTurn(SequencesEnum.PLAYER);
   }
 
   public async nextStep() {
     await delay(1000);
-    await this.setPlayerTurn(null);
-    await store.dispatch('clearPlayerSequence');
-    await this.addToSequence(getRandomInt());
-    await this.replaySequence();
-    await this.setPlayerTurn(1);
+    this.gameStore.setPlayerTurn(SequencesEnum.GAME);
+    this.sequenceStore.clearPlayerSequence();
+    this.sequenceStore.addToSequence(getRandomInt(), SequencesEnum.GAME);
+    this.replaySequence();
+    this.gameStore.setPlayerTurn(SequencesEnum.PLAYER);
   }
 
-  public async stop() {
-    await store.dispatch('clearSequences');
-    await store.dispatch('setPlayerTurn', null);
-
-    return store.dispatch('setGameRunning', false);
-  }
-
-  public addToSequence(number: number, sequenceType: SequencesEnum = SequencesEnum.GAME) {
-    return store.dispatch('addToSequence', {number, sequenceType});
+  public stop() {
+    this.sequenceStore.clearSequences();
+    this.gameStore.setPlayerTurn(SequencesEnum.GAME);
+    this.gameStore.setGameIsRunning(false);
   }
 
   public async replaySequence() {
-    const sequence = store.state.sequence;
+    const sequence = this.sequenceStore.sequence;
 
     for (const number of sequence) {
-      await store.dispatch('setCurrentNumber', number)
-      await delay(750)
+      this.sequenceStore.setCurrent(number);
+      await delay(750);
 
-      await store.dispatch('setCurrentNumber', null)
-      await delay(25)
+      this.sequenceStore.setCurrent(null);
+      await delay(25);
     }
   }
 
   public validateSequence() {
     let correct = true;
 
-    store.state.sequence.map((value, index) => {
-      if (store.state.playerSequence[index] && store.state.playerSequence[index] !== value) {
+    this.sequenceStore.sequence.map((value, index) => {
+      if (this.sequenceStore.playerSequence[index] && this.sequenceStore.playerSequence[index] !== value) {
         correct = false;
       }
-    })
+    });
 
-    store.dispatch('setSequenceIsValid', correct);
+    this.sequenceStore.setPSequenceIsValid(correct);
 
     if (!correct) {
       return this.stop();
     }
 
-    if (store.getters.playerSequenceLength === store.getters.sequenceLength) {
+    if (this.sequenceStore.playerSequenceLength === this.sequenceStore.sequenceLength) {
       return this.nextStep();
     }
-  }
-
-  protected setPlayerTurn(player: number | null) {
-    return store.dispatch('setPlayerTurn', player);
   }
 }

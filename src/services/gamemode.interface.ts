@@ -3,5 +3,5 @@ export default interface IGameMode {
   stop(): void;
   replaySequence(): void;
   nextStep(): void;
-  validateSequence(): void | Promise<any>;
+  validateSequence(): void;
 }

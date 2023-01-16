@@ -12,12 +12,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import {computed, defineProps, PropType, ref} from 'vue';
-import {TileNumbersEnum, TileColorsEnum} from "@/utils/tiles.enums";
-import {SequencesEnum} from "@/utils/sequences.enum";
-import {useStore} from "@/store";
+import useGameStore from '@/store/game';
+import useSequenceStore from '@/store/sequence';
+import { SequencesEnum } from "@/utils/sequences.enum";
+import { TileColorsEnum, TileNumbersEnum } from "@/utils/tiles.enums";
+import { computed, defineProps, PropType, ref } from 'vue';
 
-const {state, dispatch, getters} = useStore();
+const gameStore = useGameStore();
+const sequenceStore = useSequenceStore();
 
 const props = defineProps({
   color: {
@@ -39,15 +41,13 @@ const number = computed(() => {
   }
 });
 
-const isCurrent = computed(() => state.current === number.value)
-const sequenceLength = computed(() => getters.sequenceLength)
-const playerSequenceLength = computed(() => getters.playerSequenceLength)
-const {value: service} = computed(() => state.service);
+const isCurrent = computed(() => sequenceStore.current === number.value)
+const {value: service} = computed(() => gameStore.service);
 
 const focused = ref(false);
 
 const addToSequence = () => {
-  dispatch('addToSequence', {number: number.value, sequenceType: SequencesEnum.PLAYER})
+  sequenceStore.addToSequence(number.value, SequencesEnum.PLAYER)
   service.validateSequence();
 }
 </script>

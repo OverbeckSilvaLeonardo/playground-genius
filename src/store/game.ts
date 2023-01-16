@@ -1,4 +1,5 @@
 import GameModeFactory from '@/services/gamemode.factory';
+import { SequencesEnum } from '@/utils/sequences.enum';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -7,6 +8,7 @@ const useGameStore = defineStore('game', () => {
   const difficulty = ref(1);
   const isRunning = ref(false);
   const service = GameModeFactory.build(gameMode.value);
+  const playerTurn = ref<number>(0);
 
   function setDifficulty(newDifficulty: number): void {
     if (gameIsRunning()) {
@@ -32,7 +34,21 @@ const useGameStore = defineStore('game', () => {
     return isRunning.value;
   }
 
-  return { gameMode, difficulty, isRunning, service, setDifficulty, setGameMode, setGameIsRunning };
+  function setPlayerTurn(player: SequencesEnum) {    
+    playerTurn.value = player;
+  }
+
+  return {
+    gameMode,
+    difficulty,
+    isRunning,
+    service,
+    playerTurn,
+    setDifficulty,
+    setGameMode,
+    setGameIsRunning,
+    setPlayerTurn,
+  };
 });
 
 export default useGameStore;
