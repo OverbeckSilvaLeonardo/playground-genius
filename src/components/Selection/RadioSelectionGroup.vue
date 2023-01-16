@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, defineEmits, defineProps} from 'vue';
-import {useStore} from "@/store";
+import useGameStore from '@/store/game';
+import { computed, defineEmits, defineProps } from 'vue';
 
-const {state} = useStore();
+const gameStore = useGameStore();
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -58,7 +58,7 @@ const selectedOption = computed({
   }
 })
 
-const disabled = computed(() => props.lockWhenRunning && state.isRunning)
+const disabled = computed(() => props.lockWhenRunning && gameStore.isRunning)
 
 const options = computed(() => {
   let options = [];
