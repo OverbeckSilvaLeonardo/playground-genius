@@ -1,22 +1,23 @@
 <template>
   <RadioSelectionGroup
       :number-of-options="5"
+      lock-when-running
       name="difficulty-selection"
       label="Difficulty"
-      @onSelectionChange="setDifficuly"
+      v-model="selected"
   />
 </template>
 
 <script lang="ts" setup>
 import RadioSelectionGroup from '@/components/Selection/RadioSelectionGroup.vue';
-import {useStore} from '@/store';
+import useGameStore from '@/store/game';
+import { ref, watch } from 'vue';
 
-const {dispatch} = useStore();
+const gameStore = useGameStore();
 
-const setDifficuly = (difficulty: number): void => {
-  dispatch('setDifficulty', difficulty);
-};
+const selected = ref(1);
 
+watch(selected, () => gameStore.setDifficulty(selected.value));
 </script>
 
 <style scoped lang="scss">

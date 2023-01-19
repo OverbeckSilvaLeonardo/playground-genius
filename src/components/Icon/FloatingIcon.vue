@@ -1,10 +1,10 @@
 <template>
   <a
-      class="floating-icon"
-      :class="cssClasses"
-      @mouseenter="expand"
-      @mouseleave="retract"
-      @click="$emit('openInformationModal')"
+    class="floating-icon"
+    :class="cssClasses"
+    @mouseenter="expand"
+    @mouseleave="retract"
+    @click="$emit('openInformationModal')"
   >
     <div class="icon-content-wrapper">
       <i class="nes-icon coin"></i>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import {computed, defineEmits, ref} from 'vue';
+import { computed, defineEmits, ref } from 'vue';
 
 defineEmits(['openInformationModal']);
 
@@ -37,14 +37,14 @@ const setExpanded = () => {
   isExpanding.value = false;
   isRetracted.value = false;
   isRetracting.value = false;
-}
+};
 
 const setRetracted = () => {
   isRetracted.value = true;
   isRetracting.value = false;
   isExpanded.value = false;
   isExpanding.value = false;
-}
+};
 
 const setExpanding = () => {
   isExpanding.value = true;
@@ -63,12 +63,12 @@ const setRetracting = () => {
 const expand = () => {
   setExpanding();
   setTimeout(() => setExpanded(), animationTimeOut);
-}
+};
 
 const retract = () => {
   setRetracting();
   setTimeout(() => setRetracted(), animationTimeOut);
-}
+};
 </script>
 
 <style scoped lang="scss">

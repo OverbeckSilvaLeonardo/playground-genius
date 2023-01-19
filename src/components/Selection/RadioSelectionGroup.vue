@@ -1,22 +1,27 @@
 <template>
-  <section class="nes-container with-title">
+  <section class="nes-container with-title" :class="{'disabled': disabled}">
     <h3 class="title">{{ label }}</h3>
-    <label v-for="(option, index) in options" :key="index">
+    <label v-for="({value, label}, index) in options" :key="index">
       <input
           type="radio"
           class="nes-radio is-dark"
           :name="name || 'radio-group'"
-          :value="option.value"
+          :value="value"
+          :disabled="disabled"
           v-model="selectedOption"
-          @change="$emit('onSelectionChange', selectedOption)"
       />
-      <span>{{ option.label }}</span>
+      <span>{{ label }}</span>
     </label>
   </section>
 </template>
 
 <script lang="ts" setup>
-import {computed, defineProps, ref} from 'vue';
+import useGameStore from '@/store/game';
+import { computed, defineEmits, defineProps } from 'vue';
+
+const gameStore = useGameStore();
+
+const emit = defineEmits(['update:modelValue'])
 
 const props = defineProps({
   numberOfOptions: {
@@ -35,20 +40,34 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  modelValue: {
+    type: Number,
+  },
+  lockWhenRunning: {
+    type: Boolean,
+    default: false,
+  }
 });
 
-const selectedOption = ref(0);
-selectedOption.value = props.default || 1;
+const selectedOption = computed({
+  get() {
+    return props.modelValue
+  },
+  set(option) {
+    emit('update:modelValue', option)
+  }
+})
+
+const disabled = computed(() => props.lockWhenRunning && gameStore.isRunning)
 
 const options = computed(() => {
   let options = [];
   for (let i = 1; i <= props.numberOfOptions; i++) {
-    options.push({ label: i, value: i });
+    options.push({label: i, value: i});
   }
 
   return options;
 });
-
 </script>
 
 <style scoped lang="scss">
@@ -63,5 +82,14 @@ label {
 h3.title {
   background-color: var(--background-dark) !important;
   color: var(--background-secondary);
+}
+
+.disabled  {
+  border-color: var(--background-muted) !important;
+
+  h3.title, label span {
+    color: var(--background-muted);
+  }
+
 }
 </style>

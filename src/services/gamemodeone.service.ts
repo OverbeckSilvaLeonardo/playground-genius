@@ -1,5 +1,5 @@
-import IGameMode from '@/services/gamemode.interface';
+import IGameMode from '@/services/gamemode.interface'
+import GamemodeBaseService from "@/services/gamemode.base.service";
 
-export default class GameModeOneService implements IGameMode {
-  sequenceLength = 0;
+export default class GameModeOneService extends GamemodeBaseService implements IGameMode {
 }
