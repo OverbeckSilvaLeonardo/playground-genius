@@ -72,8 +72,5 @@ describe('Main Game Store', () => {
     const playerTurn = 3;
 
     expect(() => store.setPlayerTurn(playerTurn)).toThrow(Error)
-
-    console.log(store.playerTurn);
-    
   })
 });
