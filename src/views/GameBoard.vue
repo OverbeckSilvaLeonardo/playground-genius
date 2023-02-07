@@ -42,14 +42,13 @@ import FloatingIcon from '@/components/Icon/FloatingIcon.vue';
 import InformationModal from '@/components/Modal/InformationModal.vue';
 import DifficultySelection from '@/components/Selection/DifficultySelection.vue';
 import GameModeSelection from '@/components/Selection/GameModeSelection.vue';
-import { TileColorsEnum } from '@/utils/tiles.enums';
 import useGameStore from '@/store/game';
 import useSequenceStore from '@/store/sequence';
+import { TileColorsEnum } from '@/utils/tiles.enums';
 import { computed, ref } from 'vue';
 
 const gameStore = useGameStore();
 const sequenceStore = useSequenceStore();
-// const service = computed(() => gameStore.service);
 
 const { value: service } = computed(() => gameStore.service);
 const isRunning = computed(() => gameStore.isRunning);
@@ -72,17 +71,15 @@ const playerTurn = computed(() => {
 
 const showInfoModal = ref(false);
 
-const toggleInfoModal = () => {
+const toggleInfoModal = (): void => {
   showInfoModal.value = !showInfoModal.value;
 };
 
 const start = (): void => {
-  gameStore.setGameIsRunning(true);
   service.start();
 };
 
 const stop = (): void => {
-  gameStore.setGameIsRunning(false);
   service.stop();
 };
 </script>

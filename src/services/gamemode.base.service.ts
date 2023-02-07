@@ -7,23 +7,22 @@ import { SequencesEnum } from '@/utils/sequences.enum';
 export default class GamemodeBaseService implements IGameMode {
   private gameStore = useGameStore();
   private sequenceStore = useSequenceStore();
-
   public async start() {
     this.gameStore.setGameIsRunning(true);
 
     await delay(1000);
 
     this.sequenceStore.addToSequence(getRandomInt(), SequencesEnum.GAME);
-    this.replaySequence();
+    await this.replaySequence();
     this.gameStore.setPlayerTurn(SequencesEnum.PLAYER);
   }
 
   public async nextStep() {
     await delay(1000);
-    this.gameStore.setPlayerTurn(SequencesEnum.GAME);
     this.sequenceStore.clearPlayerSequence();
+    this.gameStore.setPlayerTurn(SequencesEnum.GAME);
     this.sequenceStore.addToSequence(getRandomInt(), SequencesEnum.GAME);
-    this.replaySequence();
+    await this.replaySequence();
     this.gameStore.setPlayerTurn(SequencesEnum.PLAYER);
   }
 
