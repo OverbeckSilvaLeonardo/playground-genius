@@ -1,7 +1,9 @@
+name: JEST Testing
+
 on:
   pull_request:
-    branches-ignore:
-      - master
+    branches-ignore: [ master ]
+    
 jobs:
   test: 
     name: Run JEST Tests
