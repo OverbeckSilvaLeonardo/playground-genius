@@ -8,11 +8,13 @@
         <ul>
           <li>
             <i class="nes-icon github is-small"></i>
-            GitHub: <a href="https://github.com/OverbeckSilvaLeonardo/playground-genius" target="_blank">playground-genius</a>
+            GitHub:
+            <a href="https://github.com/OverbeckSilvaLeonardo/playground-genius" target="_blank">playground-genius</a>
           </li>
           <li>
             <i class="nes-icon linkedin is-small"></i>
-            My LinkedIn: <a href="https://www.linkedin.com/in/overbecksilvaleonardo/" target="_blank">overbecksilvaleonardo</a>
+            My LinkedIn:
+            <a href="https://www.linkedin.com/in/overbecksilvaleonardo/" target="_blank">overbecksilvaleonardo</a>
           </li>
         </ul>
       </div>
@@ -27,11 +29,11 @@ defineProps({
   visible: {
     type: Boolean,
     required: true,
-    default: false
+    default: false,
   },
   close: {
-    required: true
-  }
+    required: true,
+  },
 });
 </script>
 
@@ -67,7 +69,7 @@ ul {
   li {
     display: flex;
     gap: 1em;
-    margin: .5em .5em 0;
+    margin: 0.5em 0.5em 0;
   }
 }
 
@@ -88,5 +90,4 @@ ul {
 .v-leave-to {
   opacity: 0;
 }
-
 </style>

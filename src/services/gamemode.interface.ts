@@ -1,3 +1,7 @@
 export default interface IGameMode {
-  sequenceLength: number;
+  start(): void;
+  stop(): void;
+  replaySequence(): void;
+  nextStep(): void;
+  validateSequence(): void;
 }
